@@ -7,23 +7,26 @@ Operational contracts, execution rules, and engineering boundaries for the H3 Tu
 ## 1. Architectural Contracts
 
 1. **Dual Execution Engines**:
-   - **Fast Backend**: Fused Triton kernels (SM89 Ada, 148-register allocation, paired FC1/FC2, Q/K RoPE writeback). Maximizes throughput on supported hardware.
-   - **Stream Backend**: Decoupled, tiled attention and streaming pipeline. Trades peak throughput for bounded memory overhead.
+   - **Fast Backend**: Fused Triton kernels (SM89 Ada reference baseline, 148-register allocation, paired FC1/FC2, Q/K RoPE writeback). Maximizes throughput on supported hardware.
+   - **Stream Backend**: Decoupled, tiled attention and streaming pipeline. Trades peak throughput for bounded memory overhead (~4.0–4.2 GiB VRAM), accommodating constrained hardware environments.
 2. **Explicit Backend Selection**:
    - The execution strategy (`fast` or `stream`) is strictly **caller-selected**.
    - **Prohibition on Implicit Fallback**: If a backend encounters unsupported hardware, shape mismatch, or OOM, the runtime must fail immediately with the original trace. Automatic, silent fallback between backends is strictly prohibited.
-3. **Hardware Extensibility**:
-   - RTX 4060 Laptop (8GB) and Tesla T4 represent empirical validation baselines.
-   - The compute dispatch interface is hardware-decoupled. For adapting to other architectures, refer to [`.agents/skills/h3-gpu-backend-porting/`](.agents/skills/h3-gpu-backend-porting/SKILL.md).
+3. **Reference Design and Hardware Decoupling**:
+   - Tested hardware profiles (such as RTX 4060 Laptop 8GB and Tesla T4 16GB) represent **empirical reference designs (参考设计)** for benchmarking and verification, not hard architectural constraints.
+   - The compute dispatch interface is hardware-agnostic. The runtime does not artificially restrict resolution, duration, or GPU models.
 
 ---
 
-## 2. Extended Capabilities and Adaptation Skills
+## 2. Extended Capabilities and Hardware Adaptation Skills
 
-- **GPU Architecture and Hardware Porting**:
-  For porting backends, adapting non-SM89 architectures, and tuning memory parameters (`head_group`, `reserve_vram`, streaming tile sizes), refer directly to [`.agents/skills/h3-gpu-backend-porting/`](.agents/skills/h3-gpu-backend-porting/SKILL.md).
-- **LoRA and Sampling Recipe Adaptation**:
-  For integrating custom LoRA weights, alternative distillation checkpoints, or modified scheduler parameters, refer directly to [`.agents/skills/h3-lora-recipe-adaptation/`](.agents/skills/h3-lora-recipe-adaptation/SKILL.md).
+- **GPU Architecture and Hardware Adaptation Skill**:
+  The skill [`.agents/skills/h3-gpu-backend-porting/`](.agents/skills/h3-gpu-backend-porting/SKILL.md) provides explicit, systematic procedures to guide contributors and autonomous agents in adapting the runtime for different target devices:
+  - Adapting and re-tuning Triton kernels for alternative microarchitectures (Turing, Ampere, Ada, Hopper).
+  - Configuring dynamic memory parameters (`head_group` dividing the 56 attention heads, `reserve_vram` headroom).
+  - Calibrating streaming tile sizes and execution grids for varying VRAM profiles (from 6GB consumer cards to multi-gigabyte datacenter accelerators).
+- **LoRA and Sampling Recipe Adaptation Skill**:
+  The skill [`.agents/skills/h3-lora-recipe-adaptation/`](.agents/skills/h3-lora-recipe-adaptation/SKILL.md) guides the integration of custom LoRA checkpoints, alternative distillation adapters, or modified scheduler parameters while adhering to interface invariants.
 
 ---
 
