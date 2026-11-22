@@ -1,0 +1,39 @@
+{
+  "1": {
+    "inputs": {
+      "mode": "Text to video",
+      "prompt": "A single cinematic shot of soft ocean waves on a sunny beach, subtle waves and ambient sound. Stable camera, no text.",
+      "duration_s": 5.0,
+      "steps": 4,
+      "seed": 4106,
+      "strategy": "fast",
+      "first_frame": "",
+      "last_frame": "",
+      "guides_json": "[]",
+      "references_json": "{}",
+      "variant": "auto",
+      "middle_frame": "",
+      "middle_at_seconds": 2.0,
+      "reference_image": "",
+      "reference_audio": "",
+      "reference_video": "",
+      "reference_video_audio": false,
+      "width": 832,
+      "height": 480,
+      "output_fps": 24,
+      "canvas_mode": "explicit",
+      "short_edge": 768,
+      "aspect_ratio": "16:9",
+      "length_frames": 0,
+      "ref_image_size": "match",
+      "head_group": 7,
+      "reserve_vram": 0,
+      "adapter_file": "",
+      "recipe_file": ""
+    },
+    "class_type": "H3TurboRuntime",
+    "_meta": {
+      "title": "H3 Turbo Runtime · Text to video"
+    }
+  }
+}

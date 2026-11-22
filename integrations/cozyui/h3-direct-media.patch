@@ -1,0 +1,27 @@
+--- a/src/components/controls/FileUpload.tsx
++++ b/src/components/controls/FileUpload.tsx
+@@ -56,11 +56,13 @@
+     onUpload,
+     extraHandler,
+     backgroundBackup,
++    directInput,
+     ...props
+ }: {
+     name: string;
+     label?: string;
+     backgroundBackup?: boolean;
++    directInput?: boolean;
+     type?: UploadType;
+     onUpload?: (file: File) => void;
+     extraHandler?: (
+@@ -94,7 +96,9 @@
+     }, [field.value]);
+     const handler = useEventCallback(
+         (api: Workflow, val: string, control: controlType) => {
+-            if (filetype === UploadType.IMAGE) {
++            if (directInput) {
++                api[control.node_id].inputs[control.field] = val;
++            } else if (filetype === UploadType.IMAGE) {
+                 api[control.node_id].inputs[control.field] = val;
+             } else if (control.format) {
+                 // LTX2 I2V: consumers reference this node's [0] as frames, so make it a

@@ -1,0 +1,13 @@
+{
+  "seed": 4106,
+  "condition_sha256": "fdf49f36064afc024dd9e7a96ffb387d7c98a02ee1289b48f45acd2878655fe4",
+  "file_sha256": {
+    "condition.safetensors": "fdf49f36064afc024dd9e7a96ffb387d7c98a02ee1289b48f45acd2878655fe4",
+    "nora-live-first.jpg": "ebbb44125e065e71af6498e9d3da3fff071859012e95bfdb03924562e1e8d5e5",
+    "nora-live-last.jpg": "40cf879fed378b492d38aa03d175888c6c703854143740a91f559bd02226d31e"
+  },
+  "expected_latent_sha256": {
+    "video": "8e9cfc9888a047ce7a989b2868d1aa0cf38e20ec15e017704c9dc6ebdf25bb7b",
+    "audio": "5ddea81594102cb250603557f314f357a560de58c07344407fd71468d1e28f6b"
+  }
+}

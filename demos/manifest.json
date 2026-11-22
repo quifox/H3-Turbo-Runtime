@@ -1,0 +1,95 @@
+{
+  "purpose": "reproducible audiovisual benchmark and showcase examples",
+  "videos": [
+    {
+      "filename": "A01-诺拉-8步-上游T4.mp4",
+      "role": "upstream-reproduction",
+      "description_en": "Nora FL2VA 8-step baseline, stock published LightX2V Turbo, Tesla T4 cloud (5s, 832x480)",
+      "generation_setup": "upstream turbo / T4 cloud",
+      "seconds": 5.0,
+      "resolution": "832x480",
+      "size_bytes": 938013,
+      "sha256": "bd440e2319b00d56143a2cd2ea9519143be266b3fcbae7165d9acfebf7a90fb0"
+    },
+    {
+      "filename": "A02-诺拉-8步-我方优化T4.mp4",
+      "role": "optimized-runtime",
+      "description_en": "Nora FL2VA 8-step, H3 Turbo Runtime W4A8, Tesla T4 cloud (5s, 832x480)",
+      "generation_setup": "ours W4A8/Turbo optimized / T4 cloud",
+      "seconds": 5.0,
+      "resolution": "832x480",
+      "size_bytes": 705055,
+      "sha256": "fa593008a9ed4f6e139f6c67b4c82fd3fe658446f061c7ae1aae0371f383a9dc"
+    },
+    {
+      "filename": "A03-诺拉-4步-上游T4.mp4",
+      "role": "upstream-reproduction",
+      "description_en": "Nora FL2VA 4-step baseline, stock published LightX2V Turbo, Tesla T4 cloud (5s, 832x480)",
+      "generation_setup": "upstream turbo / T4 cloud",
+      "seconds": 5.0,
+      "resolution": "832x480",
+      "size_bytes": 891877,
+      "sha256": "5b264a06b56ba8cd6d5d02f95a5bacf77f0d02f4683b0ae981732b89162866c2"
+    },
+    {
+      "filename": "A04-诺拉-4步-我方优化4060.mp4",
+      "role": "optimized-runtime",
+      "description_en": "Nora FL2VA 4-step, H3 Turbo Runtime W4A8, RTX 4060 Laptop 8GB (5s, 832x480)",
+      "generation_setup": "ours W4A8/Turbo optimized / RTX 4060 Laptop 8GB",
+      "seconds": 5.0,
+      "resolution": "832x480",
+      "size_bytes": 666158,
+      "sha256": "19c42a5d9befec0b731053c882a936369de1c0e66832f7c91d75970b562eeae3"
+    },
+    {
+      "filename": "B02-飞船舰长-我方Turbo.mp4",
+      "role": "optimized-runtime",
+      "description_en": "Starship captain sci-fi scene, pure text-to-audiovisual T2VA, H3 Turbo Runtime (10.0s, 832x480, 240 frames)",
+      "generation_setup": "ours W4A8/Turbo T2VA fast path / RTX 4060 Laptop 8GB",
+      "seconds": 10.0,
+      "resolution": "832x480",
+      "size_bytes": 2716212,
+      "sha256": "4e16293abcbff469b38c70fbb67a66f16bb611ef07148c331411c5bb0bf5d0e3"
+    },
+    {
+      "filename": "B04-拉面家庭-我方Turbo.mp4",
+      "role": "optimized-runtime",
+      "description_en": "Ramen family dining scene, multi-guide temporal guidance, H3 Turbo Runtime (8.0s, 832x480, 192 frames)",
+      "generation_setup": "ours W4A8/Turbo timeline multi-guide / RTX 4060 Laptop 8GB",
+      "seconds": 8.0,
+      "resolution": "832x480",
+      "size_bytes": 1340837,
+      "sha256": "53bccf4789e23c8bf914a11730d37c64b19474437dcf5f5a04eea6b91ea39430"
+    },
+    {
+      "filename": "C01-再来一次-最终15秒-1080p有声.mp4",
+      "role": "optimized-runtime-showcase",
+      "description_en": "Single-pass 15-second joint audiovisual generation with 4 timeline guides (15.0s, 1872x1080 delivered)",
+      "generation_setup": "ours W4A8/Turbo 15s streaming joint generation / RTX 4060 Laptop 8GB",
+      "seconds": 15.0,
+      "resolution": "1872x1080",
+      "size_bytes": 24819370,
+      "sha256": "db3a541846420ed99e3ec4795396111661945cb40fa2ced50925b1db27c76228"
+    },
+    {
+      "filename": "C02-奶龙-Ref2VA-有声.mp4",
+      "role": "optimized-runtime-showcase",
+      "description_en": "Multimodal character and voice reference Ref2VA generation (5.0s, 832x480)",
+      "generation_setup": "ours W4A8 Ref2VA backbone with 8-step LoRA / RTX 4060 Laptop 8GB",
+      "seconds": 5.0,
+      "resolution": "832x480",
+      "size_bytes": 527289,
+      "sha256": "62a7abf4e41d8d819fc5646660ea12412aa8f92936cf51824503ecabe3780f6b"
+    },
+    {
+      "filename": "C03-赎命-最终44秒-1080p原声.mp4",
+      "role": "optimized-runtime-showcase",
+      "description_en": "12-shot comic drama sequence (44.96s) rendered with H3 Turbo Runtime, 1080p original audio",
+      "generation_setup": "ours W4A8/Turbo 12-shot batch generation pipeline / RTX 4060 Laptop 8GB",
+      "seconds": 44.96,
+      "resolution": "1920x1080",
+      "size_bytes": 58593318,
+      "sha256": "b25b3e5cb807e053c0abbd7f22e2cbf24e5f64ff29b8a70d97b52dec538e59f5"
+    }
+  ]
+}

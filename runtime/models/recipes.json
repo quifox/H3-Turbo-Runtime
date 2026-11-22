@@ -1,0 +1,24 @@
+{
+  "fl2va": {
+    "name": "LightX2V FL2VA Turbo 8-step v1.0",
+    "supported_steps": [
+      4,
+      8
+    ],
+    "sampler": "euler",
+    "scheduler": "simple",
+    "video_shift": 12.0,
+    "audio_shift": 3.0
+  },
+  "ref2va": {
+    "name": "LightX2V Ref2VA Turbo 8-step v1.0",
+    "supported_steps": [
+      4,
+      8
+    ],
+    "sampler": "euler",
+    "scheduler": "simple",
+    "video_shift": 12.0,
+    "audio_shift": 3.0
+  }
+}

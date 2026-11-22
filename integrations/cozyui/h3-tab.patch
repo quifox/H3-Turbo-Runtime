@@ -1,0 +1,91 @@
+--- a/src/App.tsx
++++ b/src/App.tsx
+@@ -69,6 +69,7 @@
+ import { I18nContextProvider } from './i18n/I18nContextProvider';
+ import { AnimaTab } from './components/tabs/t2i/Anima';
+ import { LTX23T2VTab } from './components/tabs/t2v/LTX23T2V';
++import { H3TurboRuntimeTab } from './components/tabs/t2v/H3TurboRuntime';
+ import { MiniMaxH3T2VTab } from './components/tabs/t2v/MiniMaxH3T2V';
+ import { LTX23I2VTab } from './components/tabs/i2v/LTX23I2V';
+ import { LTX23V2VTab } from './components/tabs/v2v/LTX23V2V';
+@@ -113,6 +114,7 @@
+                     <VerticalBox>
+                         <WorkflowTabsContextProvider>
+                             <WorkflowTabs>
++                                {H3TurboRuntimeTab}
+                                 {HunyanT2VTab}
+                                 {LTX2T2VTab}
+                                 {LTX23T2VTab}
+--- a/src/utils/uploadStore.ts
++++ b/src/utils/uploadStore.ts
+@@ -404,14 +404,17 @@
+ export const uploadInputFile = async (
+     file: File,
+     apiUrl: string,
+-    meta: UploadMeta & { name?: string } = {},
++    meta: UploadMeta & { name?: string; backgroundBackup?: boolean } = {},
+ ): Promise<{ name: string; file: File }> => {
+     const uploaded = await uploadToInputDir(
+         file,
+         apiUrl,
+         meta.name ? { name: meta.name } : undefined,
+     );
+-    await registerUpload(uploaded.name, file, meta).catch(() => false);
++    const backup = registerUpload(uploaded.name, file, meta).catch(() => false);
++    if (!meta.backgroundBackup) {
++        await backup;
++    }
+     return uploaded;
+ };
+ 
+--- a/src/components/controls/FileUpload.tsx
++++ b/src/components/controls/FileUpload.tsx
+@@ -55,10 +55,12 @@
+     type = UploadType.IMAGE,
+     onUpload,
+     extraHandler,
++    backgroundBackup,
+     ...props
+ }: {
+     name: string;
+     label?: string;
++    backgroundBackup?: boolean;
+     type?: UploadType;
+     onUpload?: (file: File) => void;
+     extraHandler?: (
+@@ -134,6 +136,7 @@
+         const { name, file } = await uploadInputFile(src, apiUrl, {
+             tab: tabName,
+             field: props.name,
++            backgroundBackup,
+         });
+         return { filename: name, file };
+     });
+--- a/src/components/controls/GenerateButton.tsx
++++ b/src/components/controls/GenerateButton.tsx
+@@ -68,6 +68,7 @@
+     noexec?: boolean;
+     noreset?: boolean;
+     disabled?: boolean;
++    serverManagedInputs?: boolean;
+     requiredControls?: string | readonly string[];
+ };
+ 
+@@ -113,6 +114,7 @@
+     noreset,
+     disabled,
+     requiredControls,
++    serverManagedInputs,
+ }: GenerateButtonProps) => {
+     const { getValues, control, setValue: setFieldValue } = useFormContext();
+     const requiredNames = useMemo(() => {
+@@ -227,7 +229,8 @@
+ 
+         // Pass 1: the form values, before any handler reads them, so a restored
+         // file's new name flows into every node the handlers build.
+-        const preflight = createPreflightRun(noexec ? '' : apiUrl);
++        // The H3 node validates its server-persisted files during prompt submission.
++        const preflight = createPreflightRun(noexec || serverManagedInputs ? '' : apiUrl);
+         await preflight.values({
+             getValues,
+             setValue: (path, value) =>

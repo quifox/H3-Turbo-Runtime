@@ -1,0 +1,166 @@
+{
+  "tabs": {
+    "H3 Turbo Runtime": {
+      "api": "api/h3_turbo_runtime.json",
+      "controls": {
+        "mode": {
+          "id": "1",
+          "field": "mode"
+        },
+        "prompt": {
+          "id": "1",
+          "field": "prompt"
+        },
+        "first_frame": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "first_frame"
+        },
+        "last_frame": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "last_frame"
+        },
+        "duration_s": {
+          "id": "1",
+          "field": "duration_s"
+        },
+        "steps": {
+          "id": "1",
+          "field": "steps"
+        },
+        "seed": {
+          "id": "1",
+          "field": "seed"
+        },
+        "strategy": {
+          "id": "1",
+          "field": "strategy"
+        },
+        "middle_frame": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "middle_frame"
+        },
+        "reference_image": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "reference_image"
+        },
+        "reference_audio": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "reference_audio"
+        },
+        "reference_video": {
+          "id": "handle",
+          "node_id": "1",
+          "field": "reference_video"
+        },
+        "middle_at_seconds": {
+          "id": "1",
+          "field": "middle_at_seconds"
+        },
+        "reference_video_audio": {
+          "id": "1",
+          "field": "reference_video_audio"
+        },
+        "variant": {
+          "id": "1",
+          "field": "variant"
+        },
+        "width": {
+          "id": "1",
+          "field": "width"
+        },
+        "height": {
+          "id": "1",
+          "field": "height"
+        },
+        "output_fps": {
+          "id": "1",
+          "field": "output_fps"
+        },
+        "guides_json": {
+          "id": "1",
+          "field": "guides_json"
+        },
+        "references_json": {
+          "id": "1",
+          "field": "references_json"
+        },
+        "canvas_mode": {
+          "id": "1",
+          "field": "canvas_mode"
+        },
+        "short_edge": {
+          "id": "1",
+          "field": "short_edge"
+        },
+        "aspect_ratio": {
+          "id": "1",
+          "field": "aspect_ratio"
+        },
+        "length_frames": {
+          "id": "1",
+          "field": "length_frames"
+        },
+        "ref_image_size": {
+          "id": "1",
+          "field": "ref_image_size"
+        },
+        "head_group": {
+          "id": "1",
+          "field": "head_group"
+        },
+        "reserve_vram": {
+          "id": "1",
+          "field": "reserve_vram"
+        },
+        "adapter_file": {
+          "id": "1",
+          "field": "adapter_file"
+        },
+        "recipe_file": {
+          "id": "1",
+          "field": "recipe_file"
+        }
+      },
+      "defaults": {
+        "mode": "Text to video",
+        "prompt": "A single continuous cinematic shot of soft ocean waves rolling onto a quiet beach at sunrise. Natural golden light, gentle surf and wind ambience, stable camera.",
+        "first_frame": "",
+        "last_frame": "",
+        "duration_s": 5.0,
+        "steps": 4,
+        "seed": 4106,
+        "strategy": "fast",
+        "middle_frame": "",
+        "middle_at_seconds": 2.0,
+        "reference_image": "",
+        "reference_audio": "",
+        "reference_video": "",
+        "reference_video_audio": false,
+        "guides_json": "[]",
+        "references_json": "{}",
+        "variant": "auto",
+        "width": 832,
+        "height": 480,
+        "output_fps": 24,
+        "canvas_mode": "explicit",
+        "short_edge": 768,
+        "aspect_ratio": "16:9",
+        "length_frames": 0,
+        "ref_image_size": "match",
+        "head_group": 7,
+        "reserve_vram": 0,
+        "adapter_file": "",
+        "recipe_file": ""
+      },
+      "result": {
+        "id": "1",
+        "type": "images"
+      }
+    }
+  }
+}

@@ -1,0 +1,541 @@
+{
+  "last_node_id": 10,
+  "last_link_id": 9,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "H3TurboSettings",
+      "pos": [
+        -740,
+        -470
+      ],
+      "size": [
+        340,
+        280
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboSettings"
+      },
+      "widgets_values": [
+        5.0,
+        4,
+        "fast",
+        4106,
+        832,
+        480,
+        24,
+        "auto",
+        "explicit",
+        768.0,
+        "16:9",
+        0,
+        "match",
+        7,
+        0.0
+      ],
+      "title": "01 · 基础生成参数（改成15秒即可）",
+      "outputs": [
+        {
+          "name": "settings",
+          "type": "H3_SETTINGS",
+          "links": [
+            1
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        -380
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "first_frame",
+        "",
+        0.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · first_frame (默认关闭)",
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            2
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        -115
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "last_frame",
+        "",
+        0.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · last_frame (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 2
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            3
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        150
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "timed_image",
+        "",
+        2.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · timed_image (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 3
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            4
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        415
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "timed_video",
+        "",
+        2.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · timed_video (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 4
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            5
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        680
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "timed_audio",
+        "",
+        2.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · timed_audio (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            6
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        945
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "reference_image",
+        "",
+        0.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · reference_image (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 6
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            7
+          ]
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        1210
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "reference_audio",
+        "",
+        0.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · reference_audio (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            8
+          ]
+        }
+      ]
+    },
+    {
+      "id": 9,
+      "type": "H3TurboMediaCondition",
+      "pos": [
+        -360,
+        1475
+      ],
+      "size": [
+        335,
+        235
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboMediaCondition"
+      },
+      "widgets_values": [
+        false,
+        "reference_video",
+        "",
+        0.0,
+        false,
+        "match"
+      ],
+      "title": "可选 · reference_video (默认关闭)",
+      "inputs": [
+        {
+          "name": "previous",
+          "type": "H3_MEDIA",
+          "link": 8
+        }
+      ],
+      "outputs": [
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "links": [
+            9
+          ]
+        }
+      ]
+    },
+    {
+      "id": 10,
+      "type": "H3TurboRuntime",
+      "pos": [
+        110,
+        -500
+      ],
+      "size": [
+        465,
+        750
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "properties": {
+        "Node name for S&R": "H3TurboRuntime"
+      },
+      "widgets_values": [
+        "Text to video",
+        "A single continuous cinematic shot of soft ocean waves rolling onto a quiet beach at sunrise. Natural gentle camera movement, warm morning light, realistic water reflections, subtle surf and wind ambience. No cuts, no subtitles.",
+        5.0,
+        4,
+        4106,
+        "fast",
+        "",
+        "",
+        "[]",
+        "{}",
+        "auto",
+        832,
+        480,
+        24,
+        "",
+        "",
+        "",
+        2.0,
+        "",
+        "",
+        "",
+        false,
+        "explicit",
+        768.0,
+        "16:9",
+        0,
+        "match",
+        7,
+        0.0
+      ],
+      "title": "03 · H3 Turbo 原生音视频输出",
+      "inputs": [
+        {
+          "name": "settings",
+          "type": "H3_SETTINGS",
+          "link": 1
+        },
+        {
+          "name": "media",
+          "type": "H3_MEDIA",
+          "link": 9
+        }
+      ]
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      10,
+      0,
+      "H3_SETTINGS"
+    ],
+    [
+      2,
+      2,
+      0,
+      3,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      3,
+      3,
+      0,
+      4,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      4,
+      4,
+      0,
+      5,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      5,
+      5,
+      0,
+      6,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      6,
+      6,
+      0,
+      7,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      7,
+      7,
+      0,
+      8,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      8,
+      8,
+      0,
+      9,
+      0,
+      "H3_MEDIA"
+    ],
+    [
+      9,
+      9,
+      0,
+      10,
+      1,
+      "H3_MEDIA"
+    ]
+  ],
+  "groups": [
+    {
+      "title": "默认可跑：文本 → 设置 → 5秒有声MP4",
+      "bounding": [
+        -780,
+        -560,
+        1440,
+        510
+      ],
+      "color": "#4679b9",
+      "font_size": 22,
+      "locked": false
+    }
+  ],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}

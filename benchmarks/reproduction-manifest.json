@@ -1,0 +1,127 @@
+{
+  "project": "H3 Turbo Runtime",
+  "record_status": "Release documentation draft. Full fresh-install reproduction pending.",
+  "example": {
+    "mode": "first-and-last-frame to audio-video",
+    "seed": 4106,
+    "width": 832,
+    "height": 480,
+    "native_frames": 124,
+    "output_frames": 120,
+    "output_fps": 24,
+    "duration_seconds": 5,
+    "audio_sample_rate_hz": 32000,
+    "audio_channels": 2,
+    "fixture_status": "Example input assets distributed separately subject to their terms.",
+    "sampler": "Euler",
+    "schedule": "simple",
+    "optimized_eight_step_condition_sha256": "fdf49f36064afc024dd9e7a96ffb387d7c98a02ee1289b48f45acd2878655fe4",
+    "video_sigma_shift": 12.0,
+    "audio_sigma_shift": 3.0
+  },
+  "optimized_weights": [
+    {
+      "id": "dit",
+      "name": "MiniMax-H3-fl2va-pruned-comfy-w4a8.safetensors",
+      "bytes": 12540870488,
+      "sha256": "18ce05a9e588618db5ae6dca380f242bf8041d9d47f3ffb5cd80d9dec9f9b1ec",
+      "source": "https://huggingface.co/joeygambino/MiniMax-H3-comfy-native-fl2va/blob/d24400b69702a0e242351a945bb23f22f702b36b/MiniMax-H3-fl2va-pruned-comfy-w4a8.safetensors"
+    },
+    {
+      "id": "lora",
+      "name": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "bytes": 1956193000,
+      "sha256": "2339acdf19bfe123f46b971ea35d367a84adb85de43627e1eceafa5a5b2b111e",
+      "source": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/blob/c2bf13b837e33bd851b370285fc7db99482d2ab2/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors"
+    },
+    {
+      "id": "video_vae",
+      "name": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "bytes": 3171670912,
+      "sha256": "9bb2d96f218c76babd85e0611b85ca8fb330a90546c01a0005e8a58a59593410",
+      "source": "https://huggingface.co/Kijai/MiniMax-H3-experimental/blob/c2e7b89b1800123c49a0f620a1932c01d8952256/minimax_h3_video_vae_int8_convrot.safetensors"
+    },
+    {
+      "id": "audio_vae",
+      "name": "minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
+      "source": "https://huggingface.co/Comfy-Org/MiniMax-H3/blob/3f57e82/vae/minimax_h3_audio_vae_fp32.safetensors"
+    }
+  ],
+  "ada_four_step_runtime": {
+    "python": "3.14.2",
+    "torch": "2.15.0+cu132",
+    "torchvision": "0.29.2+cu132",
+    "triton": "3.9.0",
+    "comfy-kitchen": "0.2.41",
+    "comfy-aimdo": "0.6.0",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.5",
+    "av": "19.0.2",
+    "Pillow": "13.0.0",
+    "ffmpeg": "4.4.2",
+    "comfyui_revision": "0263e48806e5be43fa926d3961caac29cd268d84",
+    "cuda_compute_capability": "8.9"
+  },
+  "upstream_workflow": {
+    "repository": "https://github.com/ModelTC/Minimax-H3-Turbo",
+    "revision": "02e26d591f7a04d5d1a074c9566d5dd4f22f6225",
+    "source_graph_sha256": "44be52ef5463b7596a28fb4a8cbb4f3376bff57b2c5a2a7fef723a2180caf344",
+    "comfyui_revision": "0263e48806e5be43fa926d3961caac29cd268d84"
+  },
+  "observations": [
+    {
+      "backend": "Optimized Ada",
+      "gpu": "RTX 4060 Laptop",
+      "steps": 8,
+      "measurement": "From cached conditioning through export.",
+      "wall_seconds": 269.87,
+      "peak_device_gib": 5.33,
+      "peak_stage_rss_gib": 16.55
+    },
+    {
+      "backend": "Optimized Ada",
+      "gpu": "RTX 4060 Laptop",
+      "steps": 4,
+      "measurement": "From cached conditioning through export. Frozen reference latent hashes checked.",
+      "wall_seconds": 161.54,
+      "peak_device_gib": 5.56,
+      "peak_stage_rss_gib": 16.89
+    }
+  ],
+  "paired_quality": {
+    "ada_vae_fixed_latent": {
+      "overlap_px": [
+        64,
+        32
+      ],
+      "mae_on_255_scale": 0.259,
+      "psnr_db": 52.36
+    }
+  },
+  "model_lineage": {
+    "base": "MiniMax H3-Base-FL2VA",
+    "quantized_backbone": "Community W4A8 version of MiniMax H3-Base-FL2VA",
+    "turbo_adapter": "LightX2V FL2VA Turbo 8-step v1.0",
+    "adapter_training_resolution": "544p, mixed aspect ratios",
+    "upstream_recommended_inference_steps": [
+      8,
+      4
+    ]
+  },
+  "six_gib_budget_check": {
+    "method": "Reserve about 2 GiB on the 8 GiB Ada test device",
+    "held_mib": 2043.5,
+    "passed_stages": [
+      "first_denoising_step",
+      "video_decode"
+    ],
+    "physical_6_gib_full_clip_validated": false
+  },
+  "four_gib_profile": {
+    "status": "experimental",
+    "scope": "Candidate for tighter stage residency, weight offload and decoder tiling",
+    "physical_4_gib_full_clip_validated": false
+  }
+}

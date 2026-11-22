@@ -1,0 +1,21 @@
+{
+  "1": {
+    "inputs": {
+      "mode": "First and last frame",
+      "prompt": "",
+      "duration_s": 5.0,
+      "steps": 4,
+      "seed": 4106,
+      "strategy": "fast",
+      "first_frame": "",
+      "last_frame": "",
+      "guides_json": "[]",
+      "references_json": "{}",
+      "variant": "auto"
+    },
+    "class_type": "H3TurboRuntime",
+    "_meta": {
+      "title": "H3 Turbo Runtime · First and last frame"
+    }
+  }
+}

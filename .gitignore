@@ -1,0 +1,57 @@
+# Byte-compiled / optimized / AST files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Large model checkpoints, weights, and generation outputs
+weights/
+condition-models/
+runs/
+output/
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.onnx
+*.mp4
+*.wav
+*.f32le
+
+# Track showcase demonstration assets
+!demos/videos/
+!demos/videos/*.mp4
+
+# Environment variables, credentials, and local logs
+.env
+.env.*
+*.log
+*.pem
+*.key
+
+# Temporary, swap, and tool caches
+*.part
+*.tmp
+*.swp
+.DS_Store
+Thumbs.db
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# IDE configurations
+.vscode/
+.idea/
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+node_modules/
+*.tar.gz
+*.zip

@@ -1,0 +1,9 @@
+id,runtime,gpu,seconds,steps,denoise_s,sample_s,complete_s,peak_mib,record
+published-turbo-t4-4,Published LightX2V Turbo INT8 ConvRot,Tesla T4 16GB,5,4,1099.73,,1257.674,14649,Published workflow / stock four-step
+optimized-t4-4,H3 Turbo Runtime W4A8,Tesla T4 16GB,5,4,,168.9238,,4043,Four-step QKV/LoRA paired sampling
+optimized-4060-4,H3 Turbo Runtime W4A8,RTX 4060 Laptop 8GB,5,4,,121.492,161.544,5695,Cached conditioning to native AV MP4
+published-turbo-t4-8,Published LightX2V Turbo INT8 ConvRot,Tesla T4 16GB,5,8,2126.70,,2287.904,14649,Published workflow / stock eight-step
+optimized-t4-8,H3 Turbo Runtime W4A8,Tesla T4 16GB,5,8,558.19,589.345,670.115,4181,Cached conditions; native AV MP4
+optimized-4060-8,H3 Turbo Runtime W4A8,RTX 4060 Laptop 8GB,5,8,223.22,233.561,269.869,5455,Cached conditions; native AV MP4
+optimized-t4-15,H3 Turbo Runtime W4A8,Tesla T4 16GB,15,4,986.905,1017.258,,6319,Single-pass FL2VA; native AV MP4
+optimized-4060-15,H3 Turbo Runtime W4A8,RTX 4060 Laptop 8GB,15,4,586.791,,,6995,Single-pass FL2VA; native AV MP4

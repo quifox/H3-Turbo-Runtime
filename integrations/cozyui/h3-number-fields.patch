@@ -1,0 +1,20 @@
+--- a/src/components/controls/GenerateButton.tsx
++++ b/src/components/controls/GenerateButton.tsx
+@@ -264,7 +264,16 @@
+                 // way to ignore unrelated controls
+                 continue;
+             }
+-            const val = getValues(name);
++            let val = getValues(name);
++            // Native H3 inputs use numbers. MUI number TextField values arrive as
++            // strings through react-hook-form; normalize only this tab.
++            if (tab_name === 'H3 Turbo Runtime' && typeof val === 'string' &&
++                ['duration_s', 'steps', 'seed', 'width', 'height', 'short_edge',
++                 'length_frames', 'output_fps', 'middle_at_seconds',
++                 'head_group', 'reserve_vram'].includes(name) && val.trim() !== '') {
++                const parsed = Number(val);
++                if (Number.isFinite(parsed)) val = parsed;
++            }
+             if (val === undefined) {
+                 setErrors((e) => ({
+                     ...e,

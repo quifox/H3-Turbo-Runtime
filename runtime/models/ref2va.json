@@ -1,0 +1,26 @@
+{
+  "variant": "ref2va",
+  "weights": [
+    {
+      "id": "dit",
+      "name": "MiniMax-H3-ref2va-pruned-comfy-w4a8.safetensors",
+      "bytes": 12540870488,
+      "sha256": "ddb5e0590ec4702b8024c123c3e8b1d64539ba85446860e86c45783be8c3a09f",
+      "source": "https://huggingface.co/Kutches/minmax/resolve/0d14132311dd3818bd018ceef294ca8483da02e6/minimaxH3ComfyNativeRef2vaW4a8_v10.safetensors",
+      "original_author": "joeygambino",
+      "original_release": "https://civitai.com/models/2857809?modelVersionId=3227890",
+      "note": "Mirror has the exact author-published file SHA256, with Comfy native asym_w4a8_int8 quantization."
+    },
+    {
+      "id": "lora",
+      "name": "minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+      "bytes": 1956193000,
+      "sha256": "6a56f41ab4229c9dd845b9501bbd475ee57e112d846cf2e819d534a1ae928c5a",
+      "source": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/resolve/1a4a150fc6707329409eb52e5d75a0e987ac1928/minimax_h3_ref2v_turbo_8step_v1.0_768p_comfyui_bf16.safetensors",
+      "original_author": "lightx2v",
+      "recommended_steps": 8,
+      "video_shift": 12,
+      "audio_shift": 3
+    }
+  ]
+}

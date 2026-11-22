@@ -1,0 +1,82 @@
+{
+  "version": "1.0",
+  "configuration": {
+    "seed": 4106,
+    "steps": 4,
+    "sampler": "Euler/simple",
+    "video_shift": 12.0,
+    "audio_shift": 3.0,
+    "unet_compute": "FP32",
+    "unet_weights": "W4A8",
+    "attention": "Comfy Kitchen INT8",
+    "fc1_gpu_registers_per_thread": 148,
+    "pytorch_cpu_intraop_threads": 2,
+    "ffn_chunk_rows": 1024,
+    "qk_writeback_fused": true,
+    "video_vae_overlap_px": 32,
+    "video_vae_tile_px": 256,
+    "separate_sample_video_audio_processes": true
+  },
+  "runtime": {
+    "python": "3.14.2",
+    "torch": "2.15.0+cu132",
+    "torchvision": "0.29.2+cu132",
+    "triton": "3.9.0",
+    "comfy-kitchen": "0.2.41",
+    "comfy-aimdo": "0.6.0",
+    "safetensors": "0.8.0",
+    "numpy": "2.5.5",
+    "av": "19.0.2",
+    "Pillow": "13.0.0",
+    "ffmpeg": "4.4.2",
+    "comfyui_revision": "0263e48806e5be43fa926d3961caac29cd268d84",
+    "tested_cuda_compute_capability": "8.9"
+  },
+  "weights": [
+    {
+      "id": "dit",
+      "name": "MiniMax-H3-fl2va-pruned-comfy-w4a8.safetensors",
+      "bytes": 12540870488,
+      "sha256": "18ce05a9e588618db5ae6dca380f242bf8041d9d47f3ffb5cd80d9dec9f9b1ec",
+      "source": "https://huggingface.co/joeygambino/MiniMax-H3-comfy-native-fl2va/blob/d24400b69702a0e242351a945bb23f22f702b36b/MiniMax-H3-fl2va-pruned-comfy-w4a8.safetensors"
+    },
+    {
+      "id": "lora",
+      "name": "minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors",
+      "bytes": 1956193000,
+      "sha256": "2339acdf19bfe123f46b971ea35d367a84adb85de43627e1eceafa5a5b2b111e",
+      "source": "https://huggingface.co/lightx2v/Minimax-h3-Turbo/blob/c2bf13b837e33bd851b370285fc7db99482d2ab2/minimax_h3_fl2v_turbo_8step_v1.0_comfyui_bf16.safetensors"
+    },
+    {
+      "id": "video_vae",
+      "name": "minimax_h3_video_vae_int8_convrot.safetensors",
+      "bytes": 3171670912,
+      "sha256": "9bb2d96f218c76babd85e0611b85ca8fb330a90546c01a0005e8a58a59593410",
+      "source": "https://huggingface.co/Kijai/MiniMax-H3-experimental/blob/c2e7b89b1800123c49a0f620a1932c01d8952256/minimax_h3_video_vae_int8_convrot.safetensors"
+    },
+    {
+      "id": "audio_vae",
+      "name": "minimax_h3_audio_vae_fp32.safetensors",
+      "bytes": 605254808,
+      "sha256": "8e505d95dd1561d47abd43d4238fd40d9bb1ae9e147ed0a4cba778d76ae4db48",
+      "source": "https://huggingface.co/Comfy-Org/MiniMax-H3/blob/3f57e82/vae/minimax_h3_audio_vae_fp32.safetensors"
+    }
+  ],
+  "tested_profile": "5s-4step-Ada-sm89",
+  "conditioning_weights": [
+    {
+      "id": "text_encoder",
+      "name": "qwen3vl_4b_int8_convrot.safetensors",
+      "bytes": 5374169456,
+      "sha256": "ebbb3efdf4a6e1b766e32f6dc4fa92af9530edede0968c070b3e604aeca413aa",
+      "source": "https://huggingface.co/Stick9190/qwen3vl_4b_int8_convrot/resolve/d9449494156acb47a84c68777d78bd8d9d5df97d/qwen3vl_4b_int8_convrot.safetensors"
+    },
+    {
+      "id": "clip_projection",
+      "name": "mmh3-4b-ClipProj-v3.1.safetensors",
+      "bytes": 26256128,
+      "sha256": "0184e5c8d666a131962506d21949c2d8a8c6f33445b7b5e347e9a7e0a5baa819",
+      "source": "https://huggingface.co/NicoLab28/ClipProj-MiniMax-H3/resolve/main/mmh3-4b-ClipProj-v3.1.safetensors"
+    }
+  ]
+}
