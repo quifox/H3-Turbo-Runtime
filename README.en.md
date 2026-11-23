@@ -4,7 +4,7 @@
 
 A low-VRAM inference runtime for MiniMax H3 Turbo with **text-to-video, first/last frame and timed multi-frame guidance, configurable durations, and native audio/video output**. The default is five seconds and four denoising steps. **Measured on an RTX 4060 Laptop 8 GiB (hermetic environment managed via `uv` with Python 3.14): a 5-second clip in 159.18 s (sampling 118.92 s) with 5.86 GiB peak VRAM, and native single-pass 15-second generation with approximately 6.83 GiB peak VRAM.** Clips are generated with native video and audio rather than stitching three separate 5-second videos. First-and-last-frame guidance (FL2VA) is the primary benchmark mode.
 
-[Upstream Models & Specs](MODELS.md) · [ComfyUI workflows](integrations/comfyui/README.md) · [CozyUI integration](integrations/cozyui/README.md) · [Showcase Media](demos/README.md) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Upstream Models & Specs](MODELS.md) · [ComfyUI workflows](integrations/comfyui/README.md) · [CozyUI integration](integrations/cozyui/README.md) · [Showcase Media](demos/README.md) · [Contributing](CONTRIBUTING.en.md) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 ## Showcase Gallery
 

@@ -4,7 +4,7 @@
 
 MiniMax H3 Turbo 的低显存原生音视频推理运行时。支持**文本生成视频、首尾帧生成视频、可配置时长、多时间关键帧、原生音频和视频同步输出**，默认使用 5 秒、4 步配置。**RTX 4060 Laptop 8 GiB 实测（基于 `uv` 统一管理的 Python 3.14 环境）：5 秒生成约 2 分 39 秒（总成片 159.18 秒，去噪 118.92 秒）、整卡显存峰值 5.86 GiB；15 秒单次生成去噪 586.79 秒、显存峰值约 6.83 GiB。** 保留模型原生的视频与音频生成，无需把 15 秒拆成三段 5 秒视频。默认展示首尾帧（FL2VA）模式。
 
-[上游模型清单与规格](MODELS.md) · [完整 5 秒 ComfyUI 工作流](integrations/comfyui/complete-5s-workflow.json) · [ComfyUI 全量参数接口](integrations/comfyui/README.md) · [CozyUI 接入](integrations/cozyui/README.md) · [公开有声样片](demos/README.md) · [第三方许可归属](THIRD_PARTY_NOTICES.md)
+[上游模型清单与规格](MODELS.md) · [完整 5 秒 ComfyUI 工作流](integrations/comfyui/complete-5s-workflow.json) · [ComfyUI 全量参数接口](integrations/comfyui/README.md) · [CozyUI 接入](integrations/cozyui/README.md) · [公开有声样片](demos/README.md) · [贡献指南](CONTRIBUTING.md) · [第三方许可归属](THIRD_PARTY_NOTICES.md)
 
 ## 案例画廊 (Showcase Gallery)
 
