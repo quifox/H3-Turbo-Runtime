@@ -10,13 +10,30 @@ A low-VRAM inference runtime for MiniMax H3 Turbo with **text-to-video, first/la
 
 Representative audiovisual generations across diverse tasks powered by H3 Turbo Runtime (all media available in [`demos/`](demos/README.md)):
 
-### 1. Nora Turn
+### 1. Nora Turn · Upstream Baseline vs. Optimized Runtime
 
 | Task Mode | Settings | Description | Media File |
 |---|---|---|---|
-| First/last frame (FL2VA) | 832×480, 5s (120 frames), 4-step Fast | Generates smooth turning motion between start and end frame inputs with synchronized native audio. | [Video](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
+| First/last frame (FL2VA) | 832×480, 5s (120 frames), 4-step | Identical start/end frame condition (seed 4106) evaluating output consistency, wall time, and VRAM between published stock baseline and H3 Turbo Runtime. | [Upstream Baseline](demos/videos/A03-诺拉-4步-上游T4.mp4) · [Optimized](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
+
+<table>
+<tr>
+<th width="50%" align="center">Published Baseline (LightX2V Turbo · Tesla T4)<br>4-step clip: 1,257.67 s · Peak VRAM: 14.31 GiB</th>
+<th width="50%" align="center">H3 Turbo Runtime (Optimized · RTX 4060 Laptop)<br>4-step clip: 159.18 s · Peak VRAM: 5.86 GiB</th>
+</tr>
+<tr>
+<td align="center">
+
+https://github.com/user-attachments/assets/dc8de87b-22d6-4176-b886-feda1fd203c9
+
+</td>
+<td align="center">
 
 https://github.com/user-attachments/assets/b42f312d-52a6-4ad5-95a4-8a05eb729217
+
+</td>
+</tr>
+</table>
 
 ### 2. Native 15s Single-Pass (One More Time)
 

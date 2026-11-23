@@ -10,13 +10,30 @@ MiniMax H3 Turbo 的低显存原生音视频推理运行时。支持**文本生�
 
 基于 H3 Turbo Runtime 的多模态能力与代表性生成案例（全部视频已包含在 [`demos/`](demos/README.md) 中可直接查验播放）：
 
-### 1. 诺拉回身 (Nora Turn)
+### 1. 诺拉回身 (Nora Turn) · 开源基线 vs 我方优化对比
 
 | 任务模式 | 规格与步数 | 核心特性说明 | 样片原文件 |
 |---|---|---|---|
-| 首尾帧引导 (FL2VA) | 832×480, 5s (120帧), 4 步 Fast | 输入首帧与尾帧，模型生成平滑过渡的头部回转动作与同步环境音频。 | [样片](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
+| 首尾帧引导 (FL2VA) | 832×480, 5s (120帧), 4 步 | 输入相同首尾帧（种子 4106），测试官方基线与我方优化的生成一致性、速度与显存。 | [上游基线](demos/videos/A03-诺拉-4步-上游T4.mp4) · [我方优化](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
+
+<table>
+<tr>
+<th width="50%" align="center">公开开源基线 (LightX2V Turbo · Tesla T4)<br>4 步耗时 1,257.67 秒 · 显存 14.31 GiB</th>
+<th width="50%" align="center">H3 Turbo Runtime (我方优化 · RTX 4060)<br>4 步耗时 159.18 秒 · 显存 5.86 GiB</th>
+</tr>
+<tr>
+<td align="center">
+
+https://github.com/user-attachments/assets/dc8de87b-22d6-4176-b886-feda1fd203c9
+
+</td>
+<td align="center">
 
 https://github.com/user-attachments/assets/b42f312d-52a6-4ad5-95a4-8a05eb729217
+
+</td>
+</tr>
+</table>
 
 ### 2. 单镜头 15 秒原生生成 (再来一次)
 
