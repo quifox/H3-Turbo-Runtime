@@ -67,7 +67,7 @@ def download(item, folder):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--models', type=Path, default=ROOT / 'weights')
-    parser.add_argument('--condition-models', type=Path, default=ROOT / 'condition-models')
+    parser.add_argument('--condition-models', type=Path, default=ROOT / 'workbench' / 'condition-models')
     parser.add_argument('--variant', choices=('fl2va', 'ref2va'), default='fl2va')
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--check', action='store_true', help='Offline SHA-256 verification')

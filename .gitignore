@@ -11,6 +11,8 @@ env/
 # Large model checkpoints, weights, and generation outputs
 weights/
 condition-models/
+# External workbench: ClipProj plugin and condition weights
+/workbench/
 runs/
 output/
 *.safetensors

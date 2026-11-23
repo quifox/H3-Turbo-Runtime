@@ -191,7 +191,7 @@ export H3_RUNTIME_WORKBENCH=/path/to/workbench
 uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 ```
 
-The node accepts prompts, first/last frames, duration (five seconds by default), step count and optional timed guides, such as `[{"at_seconds":5,"image":"frame5.png"}]`. Upload images to the ComfyUI input directory. Conditioning uses `ClipProj` and `condition-models`; see the [ComfyUI instructions](integrations/comfyui/README.md).
+The node accepts prompts, first/last frames, duration (five seconds by default), step count and optional timed guides, such as `[{"at_seconds":5,"image":"frame5.png"}]`. Upload images to the ComfyUI input directory. Conditioning uses the external [ComfyUI-ClipProj](https://github.com/nicolab28/ComfyUI-ClipProj) plugin and `workbench/condition-models`; see the [ComfyUI instructions](integrations/comfyui/README.md#clipproj-conditioning-plugin-external).
 
 ## Sources and reproducibility
 

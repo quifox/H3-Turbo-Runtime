@@ -184,12 +184,12 @@ export H3_RUNTIME_MODELS=/path/to/weights
 # 可选：仅当运行时与 ComfyUI 使用不同 Python 或依赖目录时设置
 export H3_RUNTIME_PYTHON=/path/to/python
 export H3_RUNTIME_DEPS=/path/to/runtime-deps
-# 可选：条件编码权重不在仓库  时，指向实际目录
+# 可选：条件编码权重不在仓库时，指向实际目录
 export H3_RUNTIME_WORKBENCH=/path/to/workbench
 uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 ```
 
-在 ComfyUI 的 **H3 Turbo Runtime** 节点输入文本、可选首尾图、时长（默认5秒）与步数。可在 `guides_json` 中添加其他时间的图像引导，例如 `[{"at_seconds":5,"image":"frame5.png"}]`。图片先上传到 ComfyUI 输入目录。文本与图像条件由 `ClipProj`、`condition-models` 中的依赖生成，安装说明见[ComfyUI 接口与工作流](integrations/comfyui/README.md)。
+在 ComfyUI 的 **H3 Turbo Runtime** 节点输入文本、可选首尾图、时长（默认5秒）与步数。可在 `guides_json` 中添加其他时间的图像引导，例如 `[{"at_seconds":5,"image":"frame5.png"}]`。图片先上传到 ComfyUI 输入目录。文本与图像条件由外部 [ComfyUI-ClipProj](https://github.com/nicolab28/ComfyUI-ClipProj) 插件和 `workbench/condition-models` 生成；安装步骤见 [ComfyUI 接口与工作流](integrations/comfyui/README.md#clipproj-conditioning-plugin-external)。
 
 ## 权重、许可与复现
 

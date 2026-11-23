@@ -27,6 +27,26 @@ export H3_RUNTIME_MODELS=/path/to/weights
 
 Drag and drop `complete-5s-workflow.json` into the ComfyUI web interface, adjust your prompt, and click Queue Prompt. Input images and audio should be placed in ComfyUI's `input/` directory.
 
+### ClipProj conditioning plugin (external)
+
+Text and image conditioning uses the external
+[ComfyUI-ClipProj](https://github.com/nicolab28/ComfyUI-ClipProj) plugin (MIT).
+It is not vendored in this repository.
+
+```bash
+git clone https://github.com/nicolab28/ComfyUI-ClipProj.git workbench/ClipProj
+git -C workbench/ClipProj checkout c01ba8fb8f41b4f2094dbd0b185cdc238fb6134c
+
+# The node expects the two conditioning weights under workbench/condition-models
+uv run python scripts/fetch_weights.py --fetch --condition-models workbench/condition-models
+```
+
+If the plugin lives elsewhere, set `H3_RUNTIME_WORKBENCH` to the directory that
+contains `ClipProj/` and `condition-models/`.
+
+The default projection is `v3.1`; select the older residual-only variant with
+`H3_CLIPPROJ_VERSION=v3-mlp`.
+
 ---
 
 ## 2. Task Modes and Model Variant Selection
