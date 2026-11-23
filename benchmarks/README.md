@@ -25,7 +25,7 @@ All primary benchmark measurements evaluate an 832×480, 24-fps first/last-frame
 
 - **Tesla T4 (Cloud Baseline):**
   - Published 4-step Turbo: `1,099.73 s` denoising, `1,257.67 s` total clip time, `14,649 MiB` peak VRAM.
-  - H3 Turbo Runtime 4-step: `168.92 s` sampling, `4,043 MiB` peak VRAM.
+  - H3 Turbo Runtime 4-step: `168.92 s` sampling (~250 s clip), `4,043 MiB` peak VRAM.
   - Published 8-step Turbo: `2,126.70 s` denoising, `2,287.90 s` total clip time, `14,649 MiB` peak VRAM.
   - H3 Turbo Runtime 8-step: `558.19 s` denoising, `670.12 s` total clip time, `4,181 MiB` peak VRAM.
 - **RTX 4060 Laptop 8GB (SM 8.9 Target):**

@@ -62,14 +62,14 @@
       "sha256": "53bccf4789e23c8bf914a11730d37c64b19474437dcf5f5a04eea6b91ea39430"
     },
     {
-      "filename": "C01-再来一次-最终15秒-1080p有声.mp4",
+      "filename": "C01-再来一次-最终15秒-480p有声.mp4",
       "role": "optimized-runtime-showcase",
-      "description_en": "Single-pass 15-second joint audiovisual generation with 4 timeline guides (15.0s, 1872x1080 delivered)",
+      "description_en": "Single-pass 15-second joint audiovisual generation with 4 timeline guides, un-upscaled (15.0s, 832x480 native)",
       "generation_setup": "ours W4A8/Turbo 15s streaming joint generation / RTX 4060 Laptop 8GB",
       "seconds": 15.0,
-      "resolution": "1872x1080",
-      "size_bytes": 24819370,
-      "sha256": "db3a541846420ed99e3ec4795396111661945cb40fa2ced50925b1db27c76228"
+      "resolution": "832x480",
+      "size_bytes": 4334262,
+      "sha256": "5c5ebe6ab2f7c2ccaaac456d0a5c2471686f2d3ca15d16fd3423903f380d9895"
     },
     {
       "filename": "C02-奶龙-Ref2VA-有声.mp4",
@@ -82,14 +82,14 @@
       "sha256": "62a7abf4e41d8d819fc5646660ea12412aa8f92936cf51824503ecabe3780f6b"
     },
     {
-      "filename": "C03-赎命-最终44秒-1080p原声.mp4",
+      "filename": "C03-赎命-最终44秒-480p原声.mp4",
       "role": "optimized-runtime-showcase",
-      "description_en": "12-shot comic drama sequence (44.96s) rendered with H3 Turbo Runtime, 1080p original audio",
+      "description_en": "12-shot comic drama sequence (44.96s) rendered with H3 Turbo Runtime, native 832x480 resolution, original audio",
       "generation_setup": "ours W4A8/Turbo 12-shot batch generation pipeline / RTX 4060 Laptop 8GB",
       "seconds": 44.96,
-      "resolution": "1920x1080",
-      "size_bytes": 58593318,
-      "sha256": "b25b3e5cb807e053c0abbd7f22e2cbf24e5f64ff29b8a70d97b52dec538e59f5"
+      "resolution": "832x480",
+      "size_bytes": 11573921,
+      "sha256": "823ac717cd2ada939a83fa51b6a2c4c52877f74d2eb6694d275006bfa33e6625"
     }
   ]
 }

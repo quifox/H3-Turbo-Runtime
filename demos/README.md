@@ -38,14 +38,14 @@ Full-length productions showcasing the advanced architectural capabilities of H3
 
 | Title | Architectural Capability | Delivered Resolution | Playable Asset |
 |---|---|---|---|
-| **One More Time (再来一次)** | **Single-Pass 15s Native Audiovisual Generation** | 1872×1080 (RelayVSR Enhanced) | [15s Single-Pass MP4](videos/C01-再来一次-最终15秒-1080p有声.mp4) |
+| **One More Time (再来一次)** | **Single-Pass 15s Native Audiovisual Generation** | 832×480 (Native Generation) | [15s Single-Pass MP4](videos/C01-再来一次-最终15秒-480p有声.mp4) |
 | **Nailong (奶龙)** | **Multimodal Ref2VA Cross-Shot Conditioning** | 832×480, 5.0s (24 fps) | [Ref2VA Audio-Video MP4](videos/C02-奶龙-Ref2VA-有声.mp4) |
-| **Redelivery (赎命)** | **12-Shot Narrative Sequence (44.96s)** | Native 832×480 (5s × 12 shots), RelayVSR 1080p Delivered | [44.96s Narrative MP4](videos/C03-赎命-最终44秒-1080p原声.mp4) |
+| **Redelivery (赎命)** | **12-Shot Narrative Sequence (44.96s)** | Native 832×480 (5s × 12 shots) | [44.96s Narrative MP4](videos/C03-赎命-最终44秒-480p原声.mp4) |
 
 *Key Highlights:*
 - **Single-Pass 15s**: Runs 360 native frames in a continuous streaming denoising pass on RTX 4060 Laptop 8GB (586.79s denoise, 6.83 GiB peak VRAM).
 - **Ref2VA Conditioning**: Uses character reference image and audio inputs to guide character appearance and vocal timbre across frames.
-- **Narrative Sequence**: 12 native 5-second shots (832×480) generated individually with H3 Turbo, enhanced via RelayVSR super-resolution and edited into a continuous 44.96s narrative short with original synchronized audio.
+- **Narrative Sequence**: 12 native 5-second shots (832×480) generated individually with H3 Turbo, edited into a continuous 44.96s narrative short with original synchronized audio.
 
 ---
 

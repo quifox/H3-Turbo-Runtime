@@ -22,9 +22,9 @@ https://github.com/user-attachments/assets/b42f312d-52a6-4ad5-95a4-8a05eb729217
 
 | Task Mode | Settings | Description | Media File |
 |---|---|---|---|
-| 4-guide timeline (FL2VA) | 832×480, 15s (360 frames), 4-step Stream | Generates a continuous 15-second audiovisual sequence (360 frames) in a single pass guided by four intermediate keyframes. | [Video](demos/videos/C01-再来一次-最终15秒-1080p有声.mp4) |
+| 4-guide timeline (FL2VA) | 832×480, 15s (360 frames), 4-step Stream | Generates a continuous 15-second audiovisual sequence (360 frames) in a single pass guided by four intermediate keyframes. | [Video](demos/videos/C01-再来一次-最终15秒-480p有声.mp4) |
 
-https://github.com/user-attachments/assets/cc6ee00d-2433-4a59-b455-4c5607a629fa
+https://github.com/user-attachments/assets/6e4717a6-9945-484d-9175-64ad68eb49d2
 
 ### 3. Starship Captain
 
@@ -54,12 +54,12 @@ https://github.com/user-attachments/assets/b38c0cb4-e39c-4289-855c-61866b0f57e7
 
 | Task Mode | Settings | Description | Media File |
 |---|---|---|---|
-| Multi-shot narrative sequence (12 shots) | Native 832×480 (5s × 12 shots), RelayVSR 1080p delivered, 44.96s | 12 native 5-second shots generated with H3 Turbo, enhanced via RelayVSR super-resolution and edited into a continuous 44.96s narrative short with original audio. | [Video](demos/videos/C03-赎命-最终44秒-1080p原声.mp4) |
+| Multi-shot narrative sequence (12 shots) | Native 832×480 (5s × 12 shots), 44.96s | 12 native 5-second 832×480 shots generated with H3 Turbo, edited into a continuous 44.96s narrative short with original audio. | [Video](demos/videos/C03-赎命-最终44秒-480p原声.mp4) |
 
 <details>
 <summary>Expand 44.96s full narrative clip online player (reduces initial page load)</summary>
 
-https://github.com/user-attachments/assets/fa2eafd7-63ce-4622-8aa4-51c403025516
+https://github.com/user-attachments/assets/dfae256b-6761-4013-9d57-f74e7e467e4c
 
 </details>
 
@@ -72,24 +72,24 @@ All example clips use **832×480 at 24 fps, with first-and-last-frame guidance (
 | Runtime | GPU | Steps | Denoise / sampling | Completed clip | Peak VRAM |
 |---|---|---:|---:|---:|---:|
 | Published LightX2V Turbo (INT8 ConvRot) | Tesla T4 16GB | 4 | 1,099.73 s | 1,257.67 s | 14.31 GiB |
-| **H3 Turbo Runtime** | Tesla T4 16GB | 4 | **168.92 s** | — | **3.95 GiB** |
+| **H3 Turbo Runtime** | Tesla T4 16GB | 4 | **168.92 s** | **~250 s*** | **3.95 GiB** |
 | **H3 Turbo Runtime** | RTX 4060 Laptop 8GB | 4 | **118.92 s** | **159.18 s** | **5.86 GiB** |
 | Published LightX2V Turbo (INT8 ConvRot) | Tesla T4 16GB | 8 | 2,126.70 s | 2,287.90 s | 14.31 GiB |
 | **H3 Turbo Runtime** | Tesla T4 16GB | 8 | **558.19 s** | **670.12 s** | **4.08 GiB** |
 | **H3 Turbo Runtime** | RTX 4060 Laptop 8GB | 8 | **223.22 s** | **269.87 s** | **5.33 GiB** |
 
-<small>The 118.92 s RTX 4060 result measures the sampling stage, while its 159.18 s completed-clip time represents full end-to-end processing under a uv-managed hermetic runtime. The T4 four-step optimized path was validated over all four denoising steps and both AV latents, but its archived MP4 has no audio track; the corresponding completed native-AV time is therefore omitted. Upstream and optimized deployments differ in quantization, execution environment, and parts of their timing boundaries, so their observed speed ratios are deployment-level comparisons, not exact isolated-kernel speedups.</small>
+<small>The 118.92 s RTX 4060 result measures the sampling stage, while its 159.18 s completed-clip time represents full end-to-end processing. *The T4 four-step sampling was 168.92 s, and its archived video-only run took ~248 s (with estimated ~80 s VAE decode, completed native-AV output is ~250 s). Upstream and optimized deployments differ in quantization, execution environment, and parts of their timing boundaries, so their observed speed ratios are deployment-level comparisons, not exact isolated-kernel speedups.</small>
 
 ### 15 seconds · single-pass long video
 
 | Runtime | GPU | Steps | Four denoising steps | Sampling stage | Peak VRAM |
 |---|---|---:|---:|---:|---:|
 | **H3 Turbo Runtime** | Tesla T4 16GB | 4 | **986.90 s** | 1,017.26 s | **6.17 GiB** |
-| **H3 Turbo Runtime** | RTX 4060 Laptop 8GB | 4 | **586.79 s** | — | **6.83 GiB** |
+| **H3 Turbo Runtime** | RTX 4060 Laptop 8GB | 4 | **586.79 s** | **592.81 s** | **6.83 GiB** |
 
 Both runs generated native 15-second video and audio in **one continuous model run**, with verified MP4 output. The table uses the same two-frame benchmark scene; optional intermediate guides are demonstrated separately in the [15-second verification notes](benchmarks/README.md).
 
-<small>15-second denoising time excludes model startup, conditioning, decoding, and muxing. For a separate four-guide 4060 example, the sum of explicitly timed conditioning, denoising, and AV decoding stages was 698.1 s (11m 38s).</small>
+<small>15-second denoising time measures four model steps; sampling stage includes scheduling setup (RTX 4060 measured 592.81 s; completed clip with AV decoding is ~10m 38s). For a separate four-guide 4060 example with condition encoding, total time was 698.1 s (11m 38s).</small>
 
 ### Features and duration
 
