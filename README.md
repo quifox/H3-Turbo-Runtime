@@ -4,7 +4,7 @@
 
 MiniMax H3 Turbo 的低显存原生音视频推理运行时。支持**文本生成视频、首尾帧生成视频、可配置时长、多时间关键帧、原生音频和视频同步输出**，默认使用 5 秒、4 步配置。**RTX 4060 Laptop 8 GiB 实测（基于 `uv` 统一管理的 Python 3.14 环境）：5 秒生成约 2 分 39 秒（总成片 159.18 秒，去噪 118.92 秒）、整卡显存峰值 5.86 GiB；15 秒单次生成去噪 586.79 秒、显存峰值约 6.83 GiB。** 保留模型原生的视频与音频生成，无需把 15 秒拆成三段 5 秒视频。默认展示首尾帧（FL2VA）模式。
 
-[上游模型清单与规格](MODELS.md) · [完整 5 秒 ComfyUI 工作流](integrations/comfyui/complete-5s-workflow.json) · [ComfyUI 全量参数接口](integrations/comfyui/README.md) · [CozyUI 接入](integrations/cozyui/README.md) · [公开有声样片](demos/README.md) · [贡献指南](CONTRIBUTING.md) · [第三方许可归属](THIRD_PARTY_NOTICES.md)
+[上游模型清单与规格](MODELS.md) · [AI 部署提示词](AGENT_QUICKSTART.md) · [完整 5 秒 ComfyUI 工作流](integrations/comfyui/complete-5s-workflow.json) · [ComfyUI 全量参数接口](integrations/comfyui/README.md) · [CozyUI 接入](integrations/cozyui/README.md) · [公开有声样片](demos/README.md) · [贡献指南](CONTRIBUTING.md) · [第三方许可归属](THIRD_PARTY_NOTICES.md)
 
 ## 案例画廊 (Showcase Gallery)
 
@@ -171,6 +171,8 @@ uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weight
   --duration 15 --strategy stream --condition /path/to/15s-condition.safetensors --out runs/clip-15s
 ```
 
+**给 AI 的部署入口**：[AGENT_QUICKSTART.md](AGENT_QUICKSTART.md) —— 交给 agent 直接读，按"检测 → 询问 → 部署 → 示例片"执行。
+
 CLI：duration 默认 5 秒，width/height 默认 832×480，output-fps 默认 24（原生模型仍以 24fps 推理）。FL2VA Turbo 4/8 步，Ref2VA 推荐 8 步；strategy 默认 fast，允许显式选择 stream，不自动回退。head-group/reserve-vram 为调优选项；adapter 与 recipe-file 供开发者选择兼容的 LoRA 及采样配方。不同生成时长与空间尺寸需要重新编码对应条件。项目内有 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md)，覆盖 GPU、时长、LoRA 与采样配方。
 
 **硬件适配：** 运行环境支持通过 `--strategy` 显式指定 Fast 或 Stream 模式，不会隐式回退。如需适配至其他 GPU 架构，请参考 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md)。
@@ -184,12 +186,12 @@ export H3_RUNTIME_MODELS=/path/to/weights
 # 可选：仅当运行时与 ComfyUI 使用不同 Python 或依赖目录时设置
 export H3_RUNTIME_PYTHON=/path/to/python
 export H3_RUNTIME_DEPS=/path/to/runtime-deps
-# 可选：条件编码权重不在仓库时，指向实际目录
+# 可选：条件编码权重不在仓库  时，指向实际目录
 export H3_RUNTIME_WORKBENCH=/path/to/workbench
 uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 ```
 
-在 ComfyUI 的 **H3 Turbo Runtime** 节点输入文本、可选首尾图、时长（默认5秒）与步数。可在 `guides_json` 中添加其他时间的图像引导，例如 `[{"at_seconds":5,"image":"frame5.png"}]`。图片先上传到 ComfyUI 输入目录。文本与图像条件由外部 [ComfyUI-ClipProj](https://github.com/nicolab28/ComfyUI-ClipProj) 插件和 `workbench/condition-models` 生成；安装步骤见 [ComfyUI 接口与工作流](integrations/comfyui/README.md#clipproj-conditioning-plugin-external)。
+在 ComfyUI 的 **H3 Turbo Runtime** 节点输入文本、可选首尾图、时长（默认5秒）与步数。可在 `guides_json` 中添加其他时间的图像引导，例如 `[{"at_seconds":5,"image":"frame5.png"}]`。图片先上传到 ComfyUI 输入目录。文本与图像条件由 `ClipProj`、`condition-models` 中的依赖生成，安装说明见[ComfyUI 接口与工作流](integrations/comfyui/README.md)。
 
 ## 权重、许可与复现
 

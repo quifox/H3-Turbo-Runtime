@@ -4,7 +4,7 @@
 
 A low-VRAM inference runtime for MiniMax H3 Turbo with **text-to-video, first/last frame and timed multi-frame guidance, configurable durations, and native audio/video output**. The default is five seconds and four denoising steps. **Measured on an RTX 4060 Laptop 8 GiB (hermetic environment managed via `uv` with Python 3.14): a 5-second clip in 159.18 s (sampling 118.92 s) with 5.86 GiB peak VRAM, and native single-pass 15-second generation with approximately 6.83 GiB peak VRAM.** Clips are generated with native video and audio rather than stitching three separate 5-second videos. First-and-last-frame guidance (FL2VA) is the primary benchmark mode.
 
-[Upstream Models & Specs](MODELS.md) · [ComfyUI workflows](integrations/comfyui/README.md) · [CozyUI integration](integrations/cozyui/README.md) · [Showcase Media](demos/README.md) · [Contributing](CONTRIBUTING.en.md) · [Third-party notices](THIRD_PARTY_NOTICES.md)
+[Upstream Models & Specs](MODELS.md) · [AI deployment prompt](AGENT_QUICKSTART.md) · [ComfyUI workflows](integrations/comfyui/README.md) · [CozyUI integration](integrations/cozyui/README.md) · [Showcase Media](demos/README.md) · [Contributing](CONTRIBUTING.en.md) · [Third-party notices](THIRD_PARTY_NOTICES.md)
 
 ## Showcase Gallery
 
@@ -173,6 +173,8 @@ uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weight
   --duration 15 --strategy stream --condition /path/to/15s-condition.safetensors --out runs/clip-15s
 ```
 
+**For an AI-oriented deployment prompt**, see [AGENT_QUICKSTART.md](AGENT_QUICKSTART.md).
+
 Duration defaults to 5s; width/height default to 832x480, output-fps defaults to 24 (native H3 remains 24fps). Strategy defaults to fast, or explicitly select stream. Additional options: head-group, reserve-vram, adapter, recipe-file. Use the project Runtime Optimization Playbook to adapt unverified combinations.
 
 **Hardware Adaptation**: Callers explicitly select `--strategy fast` or `stream`. The runtime executes without implicit fallback. To adapt to alternative GPU architectures, refer to the [Runtime Optimization Playbook](.agents/skills/h3-runtime-optimization/SKILL.md).
@@ -191,7 +193,7 @@ export H3_RUNTIME_WORKBENCH=/path/to/workbench
 uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 ```
 
-The node accepts prompts, first/last frames, duration (five seconds by default), step count and optional timed guides, such as `[{"at_seconds":5,"image":"frame5.png"}]`. Upload images to the ComfyUI input directory. Conditioning uses the external [ComfyUI-ClipProj](https://github.com/nicolab28/ComfyUI-ClipProj) plugin and `workbench/condition-models`; see the [ComfyUI instructions](integrations/comfyui/README.md#clipproj-conditioning-plugin-external).
+The node accepts prompts, first/last frames, duration (five seconds by default), step count and optional timed guides, such as `[{"at_seconds":5,"image":"frame5.png"}]`. Upload images to the ComfyUI input directory. Conditioning uses `ClipProj` and `condition-models`; see the [ComfyUI instructions](integrations/comfyui/README.md).
 
 ## Sources and reproducibility
 
