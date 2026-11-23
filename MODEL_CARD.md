@@ -78,7 +78,7 @@ All metrics reflect actual recorded wall times and hardware peak allocations:
 4. **Frame Geometry & Alignment**:
    - Video duration aligns to H3 temporal compression formula $N = 17k + 5$ ($k \in \mathbb{N}$) at 24fps. For example: 5s = 124 native frames (120 exported), 10s = 243 native frames (240 exported), 15s = 362 native frames (360 exported).
 5. **Hardware Adaptation Guide**:
-   - For tuning or porting to alternative NVIDIA architectures or custom memory budgets, follow the backend contract in `.agents/skills/h3-gpu-backend-porting/`.
+   - For tuning or porting to alternative NVIDIA architectures or custom memory budgets, follow the playbook in `.agents/skills/h3-runtime-optimization/SKILL.md`.
 
 ---
 
