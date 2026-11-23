@@ -1,0 +1,13 @@
+{
+  "prompt": "在这里写提示词原文",
+  "model": "H3 Turbo",
+  "variant": "fl2va",
+  "steps": 4,
+  "duration_s": 5,
+  "resolution": "832x480",
+  "fps": 24,
+  "seed": 4106,
+  "strategy": "fast",
+  "inputs": [],
+  "command": ""
+}

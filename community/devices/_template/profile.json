@@ -1,0 +1,33 @@
+{
+  "device": {
+    "gpu": "可选，可脱敏",
+    "vram_gb": 8,
+    "ram_gb": 24,
+    "os": "可选",
+    "driver": "可选",
+    "cuda": "可选",
+    "pytorch": "可选",
+    "triton": "可选",
+    "comfyui": "可选"
+  },
+  "task": {
+    "duration_s": 5,
+    "resolution": "832x480",
+    "fps": 24,
+    "steps": 4,
+    "variant": "fl2va",
+    "strategy": "fast"
+  },
+  "stages": {
+    "condition_s": 0,
+    "denoise_s": 0,
+    "video_decode_s": 0,
+    "audio_decode_s": 0,
+    "mux_s": 0
+  },
+  "peak_vram_mib": 0,
+  "kernels": [],
+  "strategies": [],
+  "verification": "",
+  "notes": ""
+}

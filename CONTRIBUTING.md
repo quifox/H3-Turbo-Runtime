@@ -15,10 +15,10 @@
 
 1. **新硬件架构与算子适配**：
    - 针对 Turing (SM75)、Ampere (SM80/SM86)、Hopper (SM90) 或 AMD ROCm/Triton 等架构进行算子调优与适配。
-   - 请遵循 [GPU 架构适配指南](.agents/skills/h3-gpu-backend-porting/SKILL.md)。
+   - 请遵循 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md)。
 2. **LoRA 适配器与采样配方**：
    - 接入新的社区微调权重、更少步数的 Turbo LoRA 蒸馏模型或自定义调度器。
-   - 请遵循 [LoRA 配方适配指南](.agents/skills/h3-lora-recipe-adaptation/SKILL.md)。
+   - 适配器与配方是 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md) 中的一个杠杆，按同一套闭环验证。
 3. **ComfyUI / CozyUI 交互与工作流**：
    - 改进节点易用性、扩展多模态条件输入控制、提供经过验证的生产级工作流模板。
 4. **自动化测试与工程健壮性**：
@@ -26,6 +26,10 @@
 5. **文档与基准数据**：
    - 提供不同硬件设备的端到端测速与显存占用数据（需附带硬件配置与环境日志）。
    - 完善部署教程、修正文档勘误与国际化翻译。
+6. **社区作品与设备报告**：
+   - 提交你自己做的视频、提示词，或你在自己设备上的适配/优化记录；其他性能优化、工具与测试也同样欢迎。
+   - 只要能提供大致可复现的内容即可；视频可选，不限制题材与格式。
+   - 目录结构与模板见 [社区贡献说明](community/README.md)。
 
 > [!NOTE]
 > **不接受的改动范围**：

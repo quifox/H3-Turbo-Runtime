@@ -18,15 +18,9 @@ Operational contracts, execution rules, and engineering boundaries for the H3 Tu
 
 ---
 
-## 2. Extended Capabilities and Hardware Adaptation Skills
+## 2. Runtime Optimization Skill
 
-- **GPU Architecture and Hardware Adaptation Skill**:
-  The skill [`.agents/skills/h3-gpu-backend-porting/`](.agents/skills/h3-gpu-backend-porting/SKILL.md) provides explicit, systematic procedures to guide contributors and autonomous agents in adapting the runtime for different target devices:
-  - Adapting and re-tuning Triton kernels for alternative microarchitectures (Turing, Ampere, Ada, Hopper).
-  - Configuring dynamic memory parameters (`head_group` dividing the 56 attention heads, `reserve_vram` headroom).
-  - Calibrating streaming tile sizes and execution grids for varying VRAM profiles (from 6GB consumer cards to multi-gigabyte datacenter accelerators).
-- **LoRA and Sampling Recipe Adaptation Skill**:
-  The skill [`.agents/skills/h3-lora-recipe-adaptation/`](.agents/skills/h3-lora-recipe-adaptation/SKILL.md) guides the integration of custom LoRA checkpoints, alternative distillation adapters, or modified scheduler parameters while adhering to interface invariants.
+The skill [`.agents/skills/h3-runtime-optimization/`](.agents/skills/h3-runtime-optimization/SKILL.md) is the investigation playbook for running the runtime on an un-tuned target: a new GPU architecture, a longer duration, a larger resolution, a new LoRA, or a different sampling recipe. It covers baseline definition, bottleneck measurement, silent-fallback detection, lever selection, numerical and visual verification, and the decision to keep or revert. Its compatibility matrix lives in [`references/compatibility.md`](.agents/skills/h3-runtime-optimization/references/compatibility.md).
 
 ---
 
@@ -66,3 +60,12 @@ Operational contracts, execution rules, and engineering boundaries for the H3 Tu
      - Test suite: `uv run pytest -v`
      - Check runtime: `uv run python deploy.py check --comfy /path/to/ComfyUI --models /path/to/weights`
      - Render video: `uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weights --condition /path/to/condition.safetensors --duration 5 --steps 4 --out runs/example`
+
+---
+
+## 6. Community Submissions
+
+- `community/` primarily collects two kinds of pull requests: works (video, prompt, recipe) and device optimization reports. Other contributions, including performance work, tooling, and tests, are welcome as normal pull requests.
+- The submission gate is minimal: provide something another person can roughly reproduce. A video is welcome but optional; prompts, topics, and formats are not restricted.
+- Two hard lines apply: no personal data, credentials, hostnames, private IPs, or absolute local paths; no oversized files (use external links for large media).
+- Community items are reviewed later. They are not official samples, verified benchmarks, or endorsements.

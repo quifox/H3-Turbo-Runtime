@@ -55,3 +55,6 @@ build/
 node_modules/
 *.tar.gz
 *.zip
+
+# Community showcase videos
+!community/works/**/*.mp4

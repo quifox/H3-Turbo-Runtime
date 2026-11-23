@@ -171,9 +171,9 @@ uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weight
   --duration 15 --strategy stream --condition /path/to/15s-condition.safetensors --out runs/clip-15s
 ```
 
-CLI：duration 默认 5 秒，width/height 默认 832×480，output-fps 默认 24（原生模型仍以 24fps 推理）。FL2VA Turbo 4/8 步，Ref2VA 推荐 8 步；strategy 默认 fast，允许显式选择 stream，不自动回退。head-group/reserve-vram 为调优选项；adapter 与 recipe-file 供开发者选择兼容的 LoRA 及采样配方。不同生成时长与空间尺寸需要重新编码对应条件。项目内有 [GPU 适配 Skill](.agents/skills/h3-gpu-backend-porting/SKILL.md) 和 [LoRA 适配 Skill](.agents/skills/h3-lora-recipe-adaptation/SKILL.md)。
+CLI：duration 默认 5 秒，width/height 默认 832×480，output-fps 默认 24（原生模型仍以 24fps 推理）。FL2VA Turbo 4/8 步，Ref2VA 推荐 8 步；strategy 默认 fast，允许显式选择 stream，不自动回退。head-group/reserve-vram 为调优选项；adapter 与 recipe-file 供开发者选择兼容的 LoRA 及采样配方。不同生成时长与空间尺寸需要重新编码对应条件。项目内有 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md)，覆盖 GPU、时长、LoRA 与采样配方。
 
-**硬件适配：** 运行环境支持通过 `--strategy` 显式指定 Fast 或 Stream 模式，不会隐式回退。如需适配至其他 GPU 架构，请参考 [GPU 适配指南](.agents/skills/h3-gpu-backend-porting/SKILL.md)。
+**硬件适配：** 运行环境支持通过 `--strategy` 显式指定 Fast 或 Stream 模式，不会隐式回退。如需适配至其他 GPU 架构，请参考 [运行时调优手册](.agents/skills/h3-runtime-optimization/SKILL.md)。
 
 ## ComfyUI 工作台
 
@@ -196,6 +196,10 @@ uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 使用 `uv run python scripts/fetch_weights.py --fetch` 一次性获取全部六份原作者权重，自动核对文件大小与 SHA-256（共约 23.67 GB）。本仓库提供完整下载与运行配方，不重复存储原始权重。模型版本、SHA-256、输入规格和验证依赖见[权重与复现清单](benchmarks/reproduction-manifest.json)。性能对照与测量口径见 [Benchmark](benchmarks/README.md)；具体优化和数值差异见[实现说明](benchmarks/implementation.md)与[画质证据](benchmarks/quality.md)。
 
 本项目的代码许可、上游权重许可和模型在线服务条件需要分别遵守。[第三方许可归属](THIRD_PARTY_NOTICES.md)
+
+## 社区贡献
+
+主要收两类：你用这套 runtime 做出的作品，和你在自己设备上的适配与优化记录。也欢迎性能优化、工具与测试等改动。只要能提供大致可复现的内容即可；视频可选，不限制提示词、题材与格式。目录结构与提交方式见 [社区贡献说明](community/README.md)。
 
 ## 社区与致谢
 

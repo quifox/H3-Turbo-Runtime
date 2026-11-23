@@ -15,10 +15,10 @@ We especially encourage contributions in the following areas:
 
 1. **New Hardware Architectures and Kernel Porting**:
    - Operator tuning and porting for Turing (SM75), Ampere (SM80/SM86), Hopper (SM90), or AMD ROCm/Triton targets.
-   - Please follow the [GPU Porting Guide](.agents/skills/h3-gpu-backend-porting/SKILL.md).
+   - Please follow the [Runtime Optimization Playbook](.agents/skills/h3-runtime-optimization/SKILL.md).
 2. **LoRA Adapters and Sampling Recipes**:
    - Integrating new community fine-tunes, fewer-step Turbo LoRA distillation checkpoints, or custom scheduler policies.
-   - Please follow the [LoRA Recipe Adaptation Guide](.agents/skills/h3-lora-recipe-adaptation/SKILL.md).
+   - Adapters and recipes are one lever inside the same [Runtime Optimization Playbook](.agents/skills/h3-runtime-optimization/SKILL.md); verify them through the same loop.
 3. **ComfyUI / CozyUI Ergonomics & Workflows**:
    - Enhancing node usability, expanding multi-modal condition inputs, and contributing verified production-ready workflows.
 4. **Automated Testing & Engineering Robustness**:
@@ -26,6 +26,10 @@ We especially encourage contributions in the following areas:
 5. **Documentation & Benchmark Replication**:
    - Contributing reproducible end-to-end latency and VRAM figures across diverse hardware setups (with system logs and specifications).
    - Refining deployment tutorials, fixing errata, and expanding translations.
+6. **Community Works and Device Reports**:
+   - Submitting videos, prompts, or adaptation/optimization notes from your own device; performance work, tooling, and tests are welcome too.
+   - Anything another person can roughly reproduce is enough; a video is optional, and topics and formats are not restricted.
+   - See [community/README.md](community/README.md) for the layout and templates.
 
 > [!NOTE]
 > **Out-of-Scope / Prohibited Changes**:
