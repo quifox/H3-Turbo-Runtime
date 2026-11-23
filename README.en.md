@@ -164,22 +164,24 @@ uv run pytest -v
 # 3. Verify environment and model assets (does not trigger rendering)
 uv run python deploy.py check --comfy /path/to/ComfyUI --models /path/to/weights
 
-# 4. Default baseline: five seconds, four steps, first/last frame conditioning
+# 4. Default baseline: five seconds, four steps, bundled encoded condition
 uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weights \
-  --condition /path/to/5s-condition.safetensors --out runs/clip-5s
+  --out runs/clip-5s
 
 # 5. Configurable duration: single-pass 15-second generation (prepare 15s condition first)
 uv run python deploy.py render --comfy /path/to/ComfyUI --models /path/to/weights \
   --duration 15 --strategy stream --condition /path/to/15s-condition.safetensors --out runs/clip-15s
 ```
 
-**For an AI-oriented deployment prompt**, see [AGENT_QUICKSTART.md](AGENT_QUICKSTART.md).
+The default example reads `runtime/examples/nora/condition.safetensors`; re-encode a condition with the ComfyUI node when changing the prompt or keyframes.
+
+**For an AI-oriented deployment prompt (CLI-first)**, see [AGENT_QUICKSTART.md](AGENT_QUICKSTART.md).
 
 Duration defaults to 5s; width/height default to 832x480, output-fps defaults to 24 (native H3 remains 24fps). Strategy defaults to fast, or explicitly select stream. Additional options: head-group, reserve-vram, adapter, recipe-file. Use the project Runtime Optimization Playbook to adapt unverified combinations.
 
 **Hardware Adaptation**: Callers explicitly select `--strategy fast` or `stream`. The runtime executes without implicit fallback. To adapt to alternative GPU architectures, refer to the [Runtime Optimization Playbook](.agents/skills/h3-runtime-optimization/SKILL.md).
 
-## ComfyUI
+## ComfyUI (optional)
 
 The node lives in [`custom_nodes/h3_turbo_runtime/`](custom_nodes/h3_turbo_runtime/). Add it to the active ComfyUI `custom_nodes` folder and set `H3_RUNTIME_MODELS` to your model directory. Optional `H3_RUNTIME_PYTHON` and `H3_RUNTIME_DEPS` select a separate execution environment.
 
@@ -197,7 +199,7 @@ The node accepts prompts, first/last frames, duration (five seconds by default),
 
 ## Sources and reproducibility
 
-Run `uv run python scripts/fetch_weights.py --fetch` to obtain all six pinned original weight files (23.67 GB total), automatically verifying file sizes and SHA-256. This repository includes the complete model-retrieval recipe without duplicating upstream weights. See the [manifest](benchmarks/reproduction-manifest.json), [cross-device benchmarking](benchmarks/README.md), [implementation notes](benchmarks/implementation.md), [output fidelity](benchmarks/quality.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The published LightX2V Turbo INT8 ConvRot workflow and this project's W4A8 runtime use different quantization/compute stacks, so observed performance improvements are system-level rather than isolated-kernel speedups.
+Run `uv run python scripts/fetch_weights.py --fetch` to obtain all six pinned original weight files (23.67 GB total), automatically verifying file sizes and SHA-256; add `--skip-conditioning` to fetch only the four main weights (≈18.27 GB) for CLI-only rendering. This repository includes the complete model-retrieval recipe without duplicating upstream weights. See the [manifest](benchmarks/reproduction-manifest.json), [cross-device benchmarking](benchmarks/README.md), [implementation notes](benchmarks/implementation.md), [output fidelity](benchmarks/quality.md), and [third-party notices](THIRD_PARTY_NOTICES.md). The published LightX2V Turbo INT8 ConvRot workflow and this project's W4A8 runtime use different quantization/compute stacks, so observed performance improvements are system-level rather than isolated-kernel speedups.
 
 ## Complete ComfyUI API and demonstration videos
 

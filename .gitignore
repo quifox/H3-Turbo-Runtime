@@ -60,3 +60,6 @@ node_modules/
 
 # Community showcase videos
 !community/works/**/*.mp4
+
+# Bundled example condition
+!runtime/examples/nora/condition.safetensors

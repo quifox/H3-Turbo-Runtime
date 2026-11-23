@@ -68,6 +68,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--models', type=Path, default=ROOT / 'weights')
     parser.add_argument('--condition-models', type=Path, default=ROOT / 'workbench' / 'condition-models')
+    parser.add_argument('--skip-conditioning', action='store_true', help='Skip text encoder and ClipProj weights; enough for CLI rendering with a pre-encoded condition')
     parser.add_argument('--variant', choices=('fl2va', 'ref2va'), default='fl2va')
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument('--check', action='store_true', help='Offline SHA-256 verification')
@@ -75,7 +76,8 @@ def main():
     args = parser.parse_args()
     data = json.loads(MANIFEST.read_text())
     items = [(x, args.models) for x in selected_weights(data, args.variant)]
-    items += [(x, args.condition_models) for x in data['conditioning_weights']]
+    if not args.skip_conditioning:
+        items += [(x, args.condition_models) for x in data['conditioning_weights']]
     print('Required weight files:', len(items), 'total GB:', round(sum(x['bytes'] for x, _ in items) / 1e9, 3), flush=True)
     failed = False
     for item, folder in items:
@@ -87,7 +89,7 @@ def main():
             download(item, folder)
     if failed:
         parser.exit(1, 'Weight validation failed\n')
-    print('All six weight files verified for variant', args.variant, flush=True)
+    print('All required weight files verified for variant', args.variant, flush=True)
 
 
 if __name__ == '__main__':

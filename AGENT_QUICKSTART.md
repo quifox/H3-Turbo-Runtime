@@ -1,11 +1,11 @@
 # 给 AI 的部署提示词
 
-> 先读完这份文件，再开始。目标是用最少的步骤，在这台机器上跑通一条 5 秒示例视频；不做目标之外的优化、训练或改造。
+> 先读完这份文件，再开始。目标是用最少的步骤，在本地用 CLI 出通一条 5 秒示例视频；出片成功即视为部署成功。ComfyUI 界面是可选的，需要时再配。
 
 ## 目标
 
+- **CLI 出片是成功标准。**
 - 能复用就复用，缺什么才装什么。
-- 只生成一条 5s / 832×480 / 24fps / 带原生音轨的 MP4。
 - 不做 15 秒、Ref2VA、性能调优、CozyUI 等额外工作。
 
 ## 1. 先检测（只读）
@@ -15,26 +15,40 @@ nvidia-smi --query-gpu=name,memory.total,driver_version --format=csv,noheader
 nvidia-smi --query-gpu=compute_cap --format=csv,noheader 2>/dev/null || true
 df -h .
 command -v uv ffmpeg git python3
+
+# ComfyUI 源码（CLI 也要用它，但不一定要起服务）
 echo "H3_RUNTIME_COMFY=${H3_RUNTIME_COMFY:-}"
-test -f "${H3_RUNTIME_COMFY:-/nonexistent}/nodes.py" && echo "ComfyUI: found" || echo "ComfyUI: not found"
+test -f "${H3_RUNTIME_COMFY:-/nonexistent}/nodes.py" && echo "ComfyUI source: found" || echo "ComfyUI source: not found"
+
+# 权重与示例条件
 ls weights 2>/dev/null | head
-ls workbench/condition-models 2>/dev/null | head
-test -f workbench/ClipProj/__init__.py && echo "ClipProj: found" || echo "ClipProj: missing"
+test -f runtime/examples/nora/condition.safetensors && echo "example condition: found" || echo "example condition: missing"
 ```
 
 判断：
 
 - 没有 GPU 或 `nvidia-smi` 失败 → 停，报告。
-- 磁盘剩余 < 40GB → 停，报告需要约 40GB。
-- 已有 ComfyUI、权重、ClipProj → 记下来，后面跳过对应步骤。
+- 磁盘剩余 < 30GB → 停（CLI 只取 4 份主权重约 18.27GB，另留输出与缓存）。
+- 已有 ComfyUI 源码、`weights/`、示例条件 → 记下来，后面跳过对应步骤。
 
-## 2. 只在缺的时候问
+## 2. 先停下来问用户
 
-以下都是非平凡操作，做之前逐项确认；已有就跳过、不问：
+**不要先做后问。** 把检测结果和缺的项一次列给用户，等用户逐项确认后再继续；已经有的项跳过、不问。
 
-1. 权重约 23.67GB，是否允许下载？放哪个目录（剩余 ≥ 40GB）？
-2. 没有 ComfyUI，是否允许克隆固定版本并装依赖？
+要问的项：
+
+1. 只跑 CLI 需要 4 份主权重，约 18.27GB；如果也要 ComfyUI 文本条件，是 6 份、约 23.67GB。选哪种？
+2. ComfyUI 源码是否已有？没有的话，是否允许准备一份？
 3. 现在是否允许跑 GPU 生成？
+
+可以直接这样问：
+
+> 本机检测到：<GPU / 显存 / 磁盘 / ComfyUI / 权重 / 示例条件状态>。
+> 缺 <X / Y / Z>，需要你确认：
+> 1) 只取 CLI 的 4 份主权重（约 18.27GB），还是连 ComfyUI 条件一起取 6 份（约 23.67GB）？
+> 2) 是否允许准备 ComfyUI 源码？用已有的还是新装？
+> 3) 现在是否允许跑 GPU 生成？
+> 你确认后我再继续。
 
 ## 3. 最小流程
 
@@ -51,76 +65,63 @@ uv run pytest -q
 
 ### 3.2 权重（缺才做）
 
+只跑 CLI：
+
 ```bash
-uv run python scripts/fetch_weights.py --fetch
+uv run python scripts/fetch_weights.py --fetch --skip-conditioning
 ```
 
-6 份，约 23.67GB；文本编码器和 ClipProj 权重会落到 `workbench/condition-models/`。校验失败就停。
+4 份主权重，约 18.27GB，落到 `weights/`。之后要用 ComfyUI 文本条件，再跑一次不带 `--skip-conditioning` 的 `--fetch`，补 2 份。
 
-### 3.3 ComfyUI（缺才做）
+### 3.3 ComfyUI 源码（缺才做，先确认）
 
 ```bash
 export H3_RUNTIME_COMFY=/path/to/ComfyUI
 uv run python deploy.py check --comfy "$H3_RUNTIME_COMFY" --models weights
 ```
 
-需要新装时，按 `runtime/models/manifest.json` 的 `runtime.comfyui_revision` 准备；先确认再装。`check` 报错就停。
+CLI 也需要这份源码（运行时会导入 ComfyUI 模块），但不需要启动 ComfyUI 服务。需要新装时，按 `runtime/models/manifest.json` 的 `runtime.comfyui_revision` 准备；先确认再装。`check` 报错就停。
 
-### 3.4 ClipProj 插件（缺才做）
-
-```bash
-git clone https://github.com/nicolab28/ComfyUI-ClipProj.git workbench/ClipProj
-git -C workbench/ClipProj checkout c01ba8fb8f41b4f2094dbd0b185cdc238fb6134c
-```
-
-它是外部 MIT 插件，不随仓库；节点默认从 `workbench/ClipProj` 加载。
-
-### 3.5 配置与启动
+### 3.4 CLI 出片
 
 ```bash
-export H3_RUNTIME_MODELS="$PWD/weights"
-export H3_RUNTIME_WORKBENCH="$PWD/workbench"
-export H3_RUNTIME_PYTHON="$PWD/.venv/bin/python"
-uv run python deploy.py configure-comfy --comfy "$H3_RUNTIME_COMFY"
-
-cd "$H3_RUNTIME_COMFY"
-python main.py --listen 127.0.0.1 --port 8188
+uv run python deploy.py render --comfy "$H3_RUNTIME_COMFY" --models weights \
+  --out runs/cli-sample --steps 4 --strategy fast
 ```
 
-显存紧张时 ComfyUI 可加 `--cpu`，生成子进程会用自己的 Python 跑 GPU。确认 `object_info` 里包含 `H3TurboRuntime`。
+- 不传 `--condition` 时，使用仓库自带的 `runtime/examples/nora/condition.safetensors`；
+- 输出在 `runs/cli-sample/output.mp4`，记录在 `runs/cli-sample/result.json`。
 
-### 3.6 出片
-
-```bash
-cd /path/to/H3-Turbo-Runtime
-python3 - <<'PY'
-import json
-wf = json.load(open("integrations/comfyui/complete-5s-api.json"))
-json.dump({"prompt": wf}, open("/tmp/h3-sample.json", "w"))
-PY
-curl -s -X POST http://127.0.0.1:8188/prompt \
-  -H 'Content-Type: application/json' -d @/tmp/h3-sample.json
-```
-
-记下 `prompt_id`，轮询 `/history/<prompt_id>`；MP4 在 `$H3_RUNTIME_COMFY/output/h3-turbo/`。
-
-如果 compute capability 不是 8.9，先停下问用户；不要自动把 `fast` 改成 `stream`。
-
-### 3.7 验证
+### 3.5 验证
 
 ```bash
 ffprobe -v error -show_entries format=duration \
   -show_entries stream=codec_type,width,height,r_frame_rate \
-  -of json /path/to/output.mp4
+  -of json runs/cli-sample/output.mp4
+python3 - <<'PY'
+import json
+r = json.load(open("runs/cli-sample/result.json"))
+c = json.load(open("runtime/examples/nora/case.json"))
+print("latents match:", r["stages"]["sample"]["latent_sha256"] == c["expected_latent_sha256"])
+PY
 ```
 
-期望：约 5.000 秒、832×480、24/1、有音频流。
+期望：约 5.000 秒、832×480、24/1、有音频流；`latents match: True`。
+
+### 3.6 ComfyUI 界面（可选）
+
+只有用户需要界面/新提示词时才做：
+
+- 按 `integrations/comfyui/README.md` 安装外部 ClipProj 插件、配置节点、启动 ComfyUI；
+- 之后可以用 `complete-5s-api.json` 从文本出片，或换首尾帧/参考素材。
+
+这不是部署成功的必要条件。
 
 ## 4. 报告
 
 - 设备与版本（GPU、驱动、ComfyUI revision、仓库 commit）
-- 部署路径（weights、workbench、ComfyUI）
-- 输出文件路径 + ffprobe 结果
+- 部署路径（weights、ComfyUI）
+- 输出文件路径 + ffprobe 结果 + `latents match`
 - 通过/失败；失败贴原始报错
 - 未验证项（如有）
 
