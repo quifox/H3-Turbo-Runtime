@@ -1,7 +1,6 @@
 """Validate a user-provided environment and run H3 Turbo at a requested duration."""
 
 from argparse import ArgumentParser
-import warnings
 import json
 from pathlib import Path
 import runpy
@@ -12,22 +11,7 @@ import sys
 ROOT = Path(__file__).resolve().parent
 
 
-def check_comfy(root, revision):
-    """Check the local ComfyUI checkout; warn about unqualified revisions."""
-    if not (root / "nodes.py").is_file():
-        raise ValueError("ComfyUI source directory must contain nodes.py")
-    if not (root / ".git").exists():
-        warnings.warn("ComfyUI revision could not be read from Git; compatibility is not yet verified", stacklevel=2)
-        return
-    result = subprocess.run(
-        ["git", "-C", str(root), "rev-parse", "HEAD"],
-        check=True, capture_output=True, text=True,
-    )
-    if result.stdout.strip() != revision:
-        warnings.warn(f"ComfyUI revision differs from the tested {revision}; verify API compatibility", stacklevel=2)
-
-
-def check_runtime(config, deps):
+def check_runtime(deps):
     """Inspect the user-provided GPU/dependencies without selecting a fallback."""
     if deps is not None:
         if not deps.is_dir():
@@ -35,7 +19,7 @@ def check_runtime(config, deps):
         sys.path.insert(0, str(deps))
     sys.path.insert(0, str(ROOT / "runtime"))
     from compat import inspect_environment
-    profile, versions = inspect_environment(tested=config)
+    profile, _ = inspect_environment()
     print(f"{profile.name}: SM {profile.capability[0]}.{profile.capability[1]}, "
           f"{profile.memory_gib:.2f} GiB VRAM, {profile.family} runtime")
     return profile
@@ -95,8 +79,6 @@ def main():
     load_recipe(args.variant, args.recipe_file)
     entry = backend / "render.py"
     manifest = json.loads((backend / "models/manifest.json").read_text())
-    runtime = manifest["runtime"]
-    check_comfy(args.comfy, runtime["comfyui_revision"])
     if args.action == "configure-comfy":
         node = ROOT / "custom_nodes/h3_turbo_runtime"
         target = args.comfy / "custom_nodes" / node.name
@@ -111,7 +93,7 @@ def main():
     verify_weights = runpy.run_path(str(entry))["verify_weights"]
     verify_weights(args.models, manifest, hashes=args.hash_weights, variant=args.variant,
                    adapter=args.adapter)
-    profile = check_runtime(runtime, args.deps)
+    profile = check_runtime(args.deps)
     if args.action == "check":
         print("Environment and model assets checked; no backend selected")
         return

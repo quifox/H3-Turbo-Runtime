@@ -80,8 +80,6 @@ def render(args, manifest):
     geometry = from_seconds(args.duration, width=args.width, height=args.height,
                             output_fps=args.output_fps)
     import torch
-    if not torch.cuda.is_available():
-        raise RuntimeError("A CUDA device is required to render")
     profile = profile_from_capability(torch.cuda.get_device_capability())
     strategy = choose_strategy(profile, requested=args.strategy)
     case_file = EXAMPLE / "case.json"

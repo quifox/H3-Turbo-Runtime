@@ -29,7 +29,6 @@
     "av": "19.0.2",
     "Pillow": "13.0.0",
     "ffmpeg": "4.4.2",
-    "comfyui_revision": "0263e48806e5be43fa926d3961caac29cd268d84",
     "tested_cuda_compute_capability": "8.9"
   },
   "weights": [

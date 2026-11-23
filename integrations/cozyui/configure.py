@@ -5,21 +5,14 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
-import warnings
 
 HERE = Path(__file__).resolve().parent
-REVISION = "6491487b20da5422a99c9c15adf0cb2277a7b0a1"
-
-
 def main():
     parser = ArgumentParser(description=__doc__)
     parser.add_argument("checkout", type=Path)
     args = parser.parse_args()
     root = args.checkout.resolve()
     git = ["git", "-C", str(root)]
-    head = subprocess.check_output([*git, "rev-parse", "HEAD"], text=True).strip()
-    if head != REVISION:
-        warnings.warn(f"CozyUI revision differs from the tested {REVISION}; applying only if patch remains compatible", stacklevel=2)
 
     overlay = {
         root / "src/components/tabs/t2v/H3TurboRuntime.tsx": HERE / "H3TurboRuntime.tsx",

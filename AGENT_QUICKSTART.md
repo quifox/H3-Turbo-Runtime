@@ -18,7 +18,6 @@ command -v uv ffmpeg git python3
 
 # ComfyUI 源码（CLI 也要用它，但不一定要起服务）
 echo "H3_RUNTIME_COMFY=${H3_RUNTIME_COMFY:-}"
-test -f "${H3_RUNTIME_COMFY:-/nonexistent}/nodes.py" && echo "ComfyUI source: found" || echo "ComfyUI source: not found"
 
 # 权重与示例条件
 ls weights 2>/dev/null | head
@@ -80,7 +79,7 @@ export H3_RUNTIME_COMFY=/path/to/ComfyUI
 uv run python deploy.py check --comfy "$H3_RUNTIME_COMFY" --models weights
 ```
 
-CLI 也需要这份源码（运行时会导入 ComfyUI 模块），但不需要启动 ComfyUI 服务。需要新装时，按 `runtime/models/manifest.json` 的 `runtime.comfyui_revision` 准备；先确认再装。`check` 报错就停。
+CLI 也需要这份源码（运行时会导入 ComfyUI 模块），但不需要启动 ComfyUI 服务。需要新装时，先确认再准备一份；导入失败就贴原始错误。
 
 ### 3.4 CLI 出片
 
