@@ -179,3 +179,7 @@ uv run python deploy.py configure-comfy --comfy /path/to/ComfyUI
 使用 `uv run python scripts/fetch_weights.py --fetch` 一次性获取全部六份原作者权重，自动核对文件大小与 SHA-256（共约 23.67 GB）。本仓库提供完整下载与运行配方，不重复存储原始权重。模型版本、SHA-256、输入规格和验证依赖见[权重与复现清单](benchmarks/reproduction-manifest.json)。性能对照与测量口径见 [Benchmark](benchmarks/README.md)；具体优化和数值差异见[实现说明](benchmarks/implementation.md)与[画质证据](benchmarks/quality.md)。
 
 本项目的代码许可、上游权重许可和模型在线服务条件需要分别遵守。[第三方许可归属](THIRD_PARTY_NOTICES.md)
+
+## 社区与致谢
+
+感谢 [LINUX DO](https://linux.do) 社区提供开放、友善的技术交流平台。
