@@ -66,8 +66,7 @@ class DeviceRoutingTests(unittest.TestCase):
             self.assertEqual(choose_strategy(p, requested="stream"), "stream")
             with self.assertRaises(ValueError):
                 choose_strategy(p, requested="auto")
-        with self.assertRaises(RuntimeError):
-            profile_from_capability((6, 1))
+        self.assertEqual(profile_from_capability((6, 1)).family, "other")
 
 
 class PackageTests(unittest.TestCase):

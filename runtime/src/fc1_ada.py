@@ -110,9 +110,8 @@ def fc1_active_ada(a8, row_scale, w8, weight_scale, delta0, delta1, *, native_qu
     packed_delta 模式消费按门/值交错的 delta，并将其原地改写为 FP32 量化输入。
     """
     dev = a8.device
-    if (not torch.is_inference_mode_enabled() or not a8.is_cuda
-            or torch.cuda.get_device_capability(dev) != (8, 9)):
-        raise ValueError("This direct FC1 path requires Ada SM89 inference")
+    if not torch.is_inference_mode_enabled() or not a8.is_cuda:
+        raise ValueError("This direct FC1 path requires CUDA inference mode")
     col_scale = native._int8_weight_scale_arg(weight_scale, dev).reshape(-1)
     row_scale = row_scale.reshape(-1)
     specs = (

@@ -34,8 +34,6 @@ def sample(args, files):
     import qk_rope_writeback
     from lora_adapter import apply_streamed_adapter
 
-    if torch.cuda.get_device_capability() != (8, 9):
-        raise RuntimeError("The fused fast kernel requires Ada (CUDA SM89)")
     conditions, latent = load_case(args.condition, args.geometry)
     cast = model_management.unet_manual_cast
 

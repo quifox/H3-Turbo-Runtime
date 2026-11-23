@@ -54,7 +54,8 @@ def download(item, folder):
                     shutil.copyfileobj(response, out, 8 * 1024 * 1024)
         except (OSError, error.URLError, RuntimeError) as exc:
             if attempt == 4:
-                raise RuntimeError(f'Failed to retrieve {dest.name}') from exc
+                print(f'Failed to retrieve {dest.name}', flush=True)
+                raise
             print('Retrying', dest.name, exc, flush=True)
             time.sleep(2 * (attempt + 1))
     if part.stat().st_size != item['bytes'] or sha256(part) != item['sha256']:

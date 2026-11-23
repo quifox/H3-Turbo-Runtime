@@ -27,8 +27,6 @@ REQUIRED_STREAM_HELPERS = ("_int8_weight_scale_arg", "_dequant_int4_grouped_to_i
 
 def profile_from_capability(capability, *, name="GPU", memory_bytes=0):
     major, minor = tuple(map(int, capability))
-    if (major, minor) < (7, 5):
-        raise RuntimeError(f"GPU {name} (SM {major}.{minor}) is below the required SM75 INT8 kernel capability")
     if major == 7:
         family = "turing"
     elif major == 8:
@@ -84,6 +82,4 @@ def inspect_environment(*, tested=None, torch_module=None):
         # public version on every platform. Runtime CUDA is checked separately.
         if pkg in installed and installed[pkg].split("+")[0] != pinned.split("+")[0]:
             warnings.warn(f"{pkg} {installed[pkg]} differs from tested {pinned}; checking required APIs instead", stacklevel=2)
-    if not profile.qualified_fast:
-        warnings.warn(f"SM {info.major}.{info.minor} has no validated Fast backend; choose a supported execution mode explicitly", stacklevel=2)
     return profile, installed

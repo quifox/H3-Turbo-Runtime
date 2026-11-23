@@ -42,9 +42,8 @@ class PairedFC2:
         self.empty = native._empty_cuda_tensor(self.device, torch.float32)
         self.hadamard = native._build_hadamard(GROUP, device=self.device, dtype=torch.float32)
         self.turing = native._cuda_device_should_use_turing_kernels(weight.get_device())
-        if not self.turing and (torch.cuda.get_device_capability(self.device) != (8, 9)
-                                or native._DISABLE_CUTLASS_INT8):
-            raise RuntimeError("Paired FC2 requires a native SM75 or SM89 INT8 GEMM")
+        if not self.turing and native._DISABLE_CUTLASS_INT8:
+            raise RuntimeError("Paired FC2 requires a native INT8 GEMM or the Turing kernel path")
         self.q = torch.empty((2 * ROWS, K), dtype=torch.int8, device=self.device)
         self.scale = torch.empty((2 * ROWS, 1), dtype=torch.float32, device=self.device)
         self.low = []

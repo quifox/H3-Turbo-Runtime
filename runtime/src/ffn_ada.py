@@ -1,4 +1,4 @@
-"""Opt-in SM89 FFN dataflow preserving the two original SwiGLU arithmetic paths."""
+"""Opt-in fused FFN dataflow preserving the two original SwiGLU arithmetic paths."""
 from contextlib import contextmanager
 
 import torch
@@ -36,7 +36,7 @@ def paired_ada_mlp(module, hidden, first, second, counters):
             or down.ndim != 2 or up.ndim != 2 or down.shape[1] != 5376
             or up.shape != (28672, down.shape[0])
             or down.dtype != torch.float16 or up.dtype != torch.float16):
-        raise RuntimeError("SM89 candidate requires the qualified FC1/FC2 geometry")
+        raise RuntimeError("Fused FFN candidate requires the qualified FC1/FC2 geometry")
     out = torch.empty_like(hidden, memory_format=torch.contiguous_format)
     probes = first.stats["fp16_delta_relative_l2"]
     start = 0
@@ -81,8 +81,7 @@ def install(counters):
 
     def dispatch(module, hidden, rows, first, second):
         if (rows != ROWS or not hidden.is_cuda or hidden.dtype != torch.float32 or hidden.ndim != 2
-                or hidden.shape[1] != WIDTH or hidden.shape[0] < 2 * ROWS
-                or torch.cuda.get_device_capability(hidden.device) != (8, 9)):
+                or hidden.shape[1] != WIDTH or hidden.shape[0] < 2 * ROWS):
             raise RuntimeError("Selected Ada FFN kernel does not support this input; no implicit backend fallback")
         return paired_ada_mlp(module, hidden, first, second, counters)
 
