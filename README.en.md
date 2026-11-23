@@ -10,14 +10,58 @@ A low-VRAM inference runtime for MiniMax H3 Turbo with **text-to-video, first/la
 
 Representative audiovisual generations across diverse tasks powered by H3 Turbo Runtime (all media available in [`demos/`](demos/README.md)):
 
-| Case | Task Mode | Settings | Description | Media Link |
-|---|---|---|---|---|
-| **Nora Turn** | First/last frame (FL2VA) | 832×480, 5s (120 frames), 4-step Fast | Generates smooth turning motion between start and end frame inputs with synchronized native audio. | [Video](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
-| **Native 15s Single-Pass (One More Time)** | 4-guide timeline (FL2VA) | 832×480, 15s (360 frames), 4-step Stream | Generates a continuous 15-second audiovisual sequence (360 frames) in a single pass guided by four intermediate keyframes. | [Video](demos/videos/C01-再来一次-最终15秒-1080p有声.mp4) |
-| **Starship Captain** | Pure Text-to-Video-Audio (T2VA) | 832×480, 10s (240 frames), 4-step Fast | Pure text prompt input generating 10 seconds of cockpit lighting and ambient spatial sound. | [Video](demos/videos/B02-飞船舰长-我方Turbo.mp4) |
-| **Ramen Family** | Multi-timeline image guides | 832×480, 8s (192 frames), 4-step Fast | Anchors intermediate moments along the timeline to guide multi-character indoor movement and restaurant ambience. | [Video](demos/videos/B04-拉面家庭-我方Turbo.mp4) |
-| **Nailong (Ref2VA)** | Cross-modal character & voice reference | 832×480, 5s (120 frames), 8-step Ref2VA | Inputs a single character reference image and audio track to preserve visual identity and vocal timbre. | [Video](demos/videos/C02-奶龙-Ref2VA-有声.mp4) |
-| **Redelivery (赎命)** | Multi-shot narrative sequence (12 shots) | Native 832×480 (5s × 12 shots), RelayVSR 1080p delivered, 44.96s | 12 native 5-second shots generated with H3 Turbo, enhanced via RelayVSR super-resolution and edited into a continuous 44.96s narrative short with original audio. | [Video](demos/videos/C03-赎命-最终44秒-1080p原声.mp4) |
+### 1. Nora Turn
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| First/last frame (FL2VA) | 832×480, 5s (120 frames), 4-step Fast | Generates smooth turning motion between start and end frame inputs with synchronized native audio. | [Video](demos/videos/A04-诺拉-4步-我方优化4060.mp4) |
+
+https://github.com/user-attachments/assets/b42f312d-52a6-4ad5-95a4-8a05eb729217
+
+### 2. Native 15s Single-Pass (One More Time)
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| 4-guide timeline (FL2VA) | 832×480, 15s (360 frames), 4-step Stream | Generates a continuous 15-second audiovisual sequence (360 frames) in a single pass guided by four intermediate keyframes. | [Video](demos/videos/C01-再来一次-最终15秒-1080p有声.mp4) |
+
+https://github.com/user-attachments/assets/cc6ee00d-2433-4a59-b455-4c5607a629fa
+
+### 3. Starship Captain
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| Pure Text-to-Video-Audio (T2VA) | 832×480, 10s (240 frames), 4-step Fast | Pure text prompt input generating 10 seconds of cockpit lighting and ambient spatial sound. | [Video](demos/videos/B02-飞船舰长-我方Turbo.mp4) |
+
+https://github.com/user-attachments/assets/1737891d-8ef4-4cfa-8b7e-f7779edf75ef
+
+### 4. Ramen Family
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| Multi-timeline image guides | 832×480, 8s (192 frames), 4-step Fast | Anchors intermediate moments along the timeline to guide multi-character indoor movement and restaurant ambience. | [Video](demos/videos/B04-拉面家庭-我方Turbo.mp4) |
+
+https://github.com/user-attachments/assets/3bafdd3e-0efd-4135-bdfb-5b141d4d36ca
+
+### 5. Nailong (Ref2VA)
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| Cross-modal character & voice reference | 832×480, 5s (120 frames), 8-step Ref2VA | Inputs a single character reference image and audio track to preserve visual identity and vocal timbre. | [Video](demos/videos/C02-奶龙-Ref2VA-有声.mp4) |
+
+https://github.com/user-attachments/assets/b38c0cb4-e39c-4289-855c-61866b0f57e7
+
+### 6. Redelivery (赎命)
+
+| Task Mode | Settings | Description | Media File |
+|---|---|---|---|
+| Multi-shot narrative sequence (12 shots) | Native 832×480 (5s × 12 shots), RelayVSR 1080p delivered, 44.96s | 12 native 5-second shots generated with H3 Turbo, enhanced via RelayVSR super-resolution and edited into a continuous 44.96s narrative short with original audio. | [Video](demos/videos/C03-赎命-最终44秒-1080p原声.mp4) |
+
+<details>
+<summary>Expand 44.96s full narrative clip online player (reduces initial page load)</summary>
+
+https://github.com/user-attachments/assets/fa2eafd7-63ce-4622-8aa4-51c403025516
+
+</details>
 
 ## Performance
 
