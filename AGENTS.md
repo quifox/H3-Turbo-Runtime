@@ -22,6 +22,8 @@ Operational contracts, execution rules, and engineering boundaries for the H3 Tu
 
 The skill [`.agents/skills/h3-runtime-optimization/`](.agents/skills/h3-runtime-optimization/SKILL.md) is the investigation playbook for running the runtime on an un-tuned target: a new GPU architecture, a longer duration, a larger resolution, a new LoRA, or a different sampling recipe. It covers baseline definition, bottleneck measurement, silent-fallback detection, lever selection, numerical and visual verification, and the decision to keep or revert. Its compatibility matrix lives in [`references/compatibility.md`](.agents/skills/h3-runtime-optimization/references/compatibility.md).
 
+Reference media is prepared by the caller; the runtime does not guard length or resolution. The contract is in [`references/reference-media.md`](.agents/skills/h3-runtime-optimization/references/reference-media.md).
+
 ---
 
 ## 3. Verification and Testing Boundaries

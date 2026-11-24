@@ -28,7 +28,7 @@ def input_image(name):
     root = Path(folder_paths.get_input_directory()).resolve()
     path = (root / name).resolve()
     if not name or not path.is_relative_to(root) or not path.is_file():
-        raise ValueError("Upload the reference image to the ComfyUI input directory")
+        raise FileNotFoundError(path)
     return str(path)
 
 
@@ -301,7 +301,7 @@ class H3TurboRuntime:
                 for guide in media.get("guides", []):
                     resolve_guide(guide)
                 resolve_references(media.get("references", {}))
-        except (ValueError, TypeError, KeyError, json.JSONDecodeError) as exc:
+        except (ValueError, TypeError, KeyError, OSError, json.JSONDecodeError) as exc:
             return str(exc)
         return True
 

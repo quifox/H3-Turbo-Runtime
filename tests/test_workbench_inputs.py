@@ -105,6 +105,26 @@ class WorkbenchInputTests(TestCase):
                 True,
             )
 
+    def test_missing_media_reports_raw_path(self):
+        with tempfile.TemporaryDirectory() as root:
+            module = load_node(Path(root))
+            with self.assertRaises(FileNotFoundError) as missing:
+                module.input_image("missing.mp4")
+            self.assertIn("missing.mp4", str(missing.exception))
+            with self.assertRaises(FileNotFoundError):
+                module.input_image("../outside.png")
+            message = module.H3TurboRuntime.VALIDATE_INPUTS(
+                "Reference to video",
+                "",
+                5.0,
+                4,
+                4106,
+                "fast",
+                reference_video="missing.mp4",
+            )
+            self.assertIsInstance(message, str)
+            self.assertIn("missing.mp4", message)
+
     def test_auto_backbone_selection(self):
         with tempfile.TemporaryDirectory() as root:
             node = load_node(Path(root))
